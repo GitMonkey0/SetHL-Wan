@@ -16,21 +16,20 @@ haotialu666@gmail.com, xpzhang@ieee.org\thanks{$^{\ast}$Corresponding author.}}
 
 \begin{abstract}
 Pose-conditioned video generators assume complete trajectories, although users
-may specify only semantically important fingers or intervals. We formulate
+may specify only important fingers or intervals. We formulate
 \emph{partially specified hand control}: obey declared constraints while
 preserving variation elsewhere. SetHL extends Hand Labanotation (HL) from fixed
 symbols to distributions over unspecified cells. A masked transformer completes
-missing symbols, a certified in-cell sampler supplies continuous variation
+missing symbols, a certified in-cell sampler provides continuous variation
 without changing HL labels, and a kinematic layer drives a
 Wan2.1-Fun-Control 1.3B model trained with rank-16 LoRA. On quality-filtered
-WLASL, matched three-seed experiments show that SetHL improves specified-symbol
+WLASL, three-seed experiments show that SetHL improves specified-symbol
 accuracy over continuous and learned vector-quantized controls by 1.59 and 1.34
 points, and reduces leakage by 3.87 and 2.80 points. The primary
 compliance--diversity hypervolume differences are not significant, while
 conditional denoising MSE improves by \DenoiseRelative\% versus continuous
 control. These results support structured partial constraints as an editable
-interface for video diffusion while separating controlled from free hand
-articulation.
+video-diffusion interface that separates controlled from free hand articulation.
 \end{abstract}
 
 \begin{keywords}
