@@ -27,6 +27,16 @@ RUNS = {
     "sethl_nohier": "wlasl_hand_cell_no_spherical_seed{}",
     "sethl": "wlasl_hand_cell_sethl_seed{}",
 }
+EXPECTED_TRAINABLE = {
+    "raster": 21_440_720,
+    "continuous": 21_839_508,
+    "vq": 21_847_978,
+    "hardhl": 21_847_978,
+    "sethl_nohier": 21_847_978,
+    "sethl": 21_847_978,
+}
+EXPECTED_LORA_PARAMETERS = 18_923_520
+EXPECTED_LORA_TENSORS = 480
 MANIFEST_SHA = "5693326da395d89911e91194a49a36e44342f43d4bc91762fcd282edd99f3dd7"
 GENERATION_SUBSET_SHA = "adbd86ff74b7485f3e8dec3f43dde5fecd9e1d106e665c9f201f87d5483a8cf8"
 TEMPERATURE_SUBSET_SHA = "643c4f7c84ae84ecf161df8589ebc1059cc2256b3f4554a908a5fc277b25edfb"
@@ -104,10 +114,30 @@ def audit(evidence_only: bool = False) -> list[str]:
             require(report_path.is_file(), f"missing training report: {report_path}", failures)
             if not evidence_only:
                 require(checkpoint.is_file(), f"missing checkpoint: {checkpoint}", failures)
+                if checkpoint.is_file():
+                    import torch
+                    state = torch.load(checkpoint, map_location="cpu", weights_only=True)
+                    lora = state.get("wan_trainable", {})
+                    require(state.get("step") == 3000 and state.get("seed") == seed,
+                            f"wrong checkpoint step or seed: {checkpoint}", failures)
+                    require(len(lora) == EXPECTED_LORA_TENSORS and
+                            all("lora_" in key for key in lora),
+                            f"wrong Wan LoRA tensor set: {checkpoint}", failures)
+                    require(sum(tensor.numel() for tensor in lora.values()) ==
+                            EXPECTED_LORA_PARAMETERS,
+                            f"wrong Wan LoRA parameter count: {checkpoint}", failures)
+                    require(all(bool(torch.isfinite(tensor).all()) for tensor in lora.values()) and
+                            any(bool(torch.count_nonzero(tensor)) for tensor in lora.values()),
+                            f"invalid or all-zero Wan LoRA state: {checkpoint}", failures)
             if report_path.is_file():
                 report = json.loads(report_path.read_text())
                 require(report.get("status") == "complete", f"incomplete run: {run}", failures)
                 require(report.get("steps") == 3000, f"wrong step count: {run}", failures)
+                require(report.get("trainable_parameters") == EXPECTED_TRAINABLE[method],
+                        f"wrong trainable-parameter budget: {run}", failures)
+                require(report.get("seconds", 0) > 0 and
+                        report.get("peak_allocated_bytes", 0) > 0,
+                        f"missing runtime or accelerator-memory evidence: {run}", failures)
                 require(report.get("latent_manifest_sha256") == MANIFEST_SHA,
                         f"wrong latent manifest: {run}", failures)
 
