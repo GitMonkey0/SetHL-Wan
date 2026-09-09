@@ -15,28 +15,22 @@ haotialu666@gmail.com, xpzhang@ieee.org\thanks{$^{\ast}$Corresponding author.}}
 \maketitle
 
 \begin{abstract}
-Pose-conditioned video generators normally interpret control as a complete
-trajectory.  This is unnecessarily rigid when an animator specifies only the
-semantically important fingers or time intervals.  We formulate
-\emph{partially specified hand control}: generated videos must obey named hand
-constraints while retaining variation elsewhere.  We introduce SetHL, a
-distribution-valued extension of Hand Labanotation (HL), and adapt a
-Wan2.1-Fun-Control 1.3B model with rank-16 LoRA.  A masked transformer completes
-unspecified symbols as distributions, and a certified in-cell sampler adds
-continuous variation without changing their HL labels. A differentiable
-hand-kinematic layer then maps them, without a joint-coordinate bypass, to
-Wan's control latent.
-Experiments on a quality-filtered WLASL subset compare fixed HL with matched
-continuous Gaussian, learned-vector-quantized, and hard-symbol controls under
-identical training budgets. We evaluate semantic compliance, diversity on
-user-declared free cells, leakage, and temporal quality with paired
-source-level bootstrap intervals. Across 27 test sources and three training
-seeds, SetHL improves specified-symbol accuracy by 1.59 and 1.34 percentage
-points over continuous and learned VQ controls, respectively, while reducing
-leakage by 3.87 and 2.80 points; neither compliance--diversity hypervolume
-difference is significant. On all 269 test clips, SetHL also reduces
-conditional denoising MSE by \DenoiseRelative\% relative to continuous control. This turns
-HL from a documentation format into an editable generative-video interface.
+Pose-conditioned video generators assume complete trajectories, although users
+may specify only semantically important fingers or intervals. We formulate
+\emph{partially specified hand control}: obey declared constraints while
+preserving variation elsewhere. SetHL extends Hand Labanotation (HL) from fixed
+symbols to distributions over unspecified cells. A masked transformer completes
+missing symbols, a certified in-cell sampler supplies continuous variation
+without changing HL labels, and a kinematic layer drives a
+Wan2.1-Fun-Control 1.3B model trained with rank-16 LoRA. On quality-filtered
+WLASL, matched three-seed experiments show that SetHL improves specified-symbol
+accuracy over continuous and learned vector-quantized controls by 1.59 and 1.34
+points, and reduces leakage by 3.87 and 2.80 points. The primary
+compliance--diversity hypervolume differences are not significant, while
+conditional denoising MSE improves by \DenoiseRelative\% versus continuous
+control. These results establish structured partial constraints as an editable
+interface for video diffusion while separating controlled from free hand
+articulation.
 \end{abstract}
 
 \begin{keywords}
@@ -312,6 +306,11 @@ by where variation occurs, not merely by whether generated motion is diverse.
 The present evaluation is limited to short, hand-focused WLASL clips and
 tracker-derived pseudo-labels; broader domains and human judgments remain
 future work.
+
+\section{Compliance with Ethical Standards}
+This study used only the publicly available WLASL dataset and involved no new
+data collection or interaction with human participants; no ethical approval
+was required.
 
 \section{Acknowledgment}
 OpenAI Codex assisted with language drafting throughout the manuscript,

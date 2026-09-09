@@ -7,6 +7,7 @@ import argparse
 import json
 import hashlib
 import math
+import re
 from pathlib import Path
 
 import pymupdf
@@ -278,9 +279,18 @@ def audit(evidence_only: bool = False) -> list[str]:
     for required_text in (
             "Haotian Lu", "Xiao-Ping Zhang", "Tsinghua University",
             "haotialu666@gmail.com", "xpzhang@ieee.org",
-            "OpenAI Codex assisted"):
+            "OpenAI Codex assisted", "Compliance with Ethical Standards",
+            "publicly available WLASL dataset"):
         require(required_text in manuscript,
                 f"manuscript is missing required text: {required_text}", failures)
+    abstract_match = re.search(
+        r"\\begin\{abstract\}(.*?)\\end\{abstract\}", manuscript, re.DOTALL)
+    require(abstract_match is not None, "manuscript abstract is missing", failures)
+    if abstract_match is not None:
+        abstract_text = re.sub(r"\\[A-Za-z]+", " ", abstract_match.group(1))
+        abstract_words = re.findall(r"[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*", abstract_text)
+        require(100 <= len(abstract_words) <= 150,
+                f"abstract has {len(abstract_words)} words (expected 100--150)", failures)
     qualitative = HERE / "paper" / "figures" / "qualitative.pdf"
     qualitative_meta = qualitative.with_suffix(".json")
     require(qualitative.is_file(), "qualitative figure is missing", failures)
