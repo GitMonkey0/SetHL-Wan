@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import shutil
 from pathlib import Path
 
@@ -67,6 +68,15 @@ def copy_file(relative: Path, target: Path) -> None:
     destination = target / relative
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, destination)
+    # Generation provenance is retained, but machine-specific prefixes are not.
+    if relative.name == "generation.json" and "results/generated" in relative.as_posix():
+        payload = json.loads(destination.read_text())
+        checkpoint = payload.get("checkpoint")
+        if checkpoint:
+            checkpoint = Path(checkpoint)
+            payload["checkpoint"] = (Path("runs") / checkpoint.parent.name /
+                                     checkpoint.name).as_posix()
+            destination.write_text(json.dumps(payload, indent=2) + "\n")
 
 
 def main() -> None:
