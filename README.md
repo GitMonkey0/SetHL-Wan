@@ -164,8 +164,12 @@ python summarize_generation_table.py \
   --output-json results/final_generation_summary.json --output-tex paper/results.tex
 
 cd paper && make
-cd .. && python release_audit.py
+cd .. && python release_audit.py --evidence-only
 ```
+
+The distributed repository omits large checkpoints and RGB videos, so the
+command above audits all released evidence. After reproducing the checkpoints
+locally, omit `--evidence-only` to additionally verify every final checkpoint.
 
 MediaPipe evaluation is best installed in a separate environment using
 `requirements-eval.txt`, because its protobuf constraint may conflict with
