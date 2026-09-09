@@ -56,7 +56,7 @@ and approximate one-shot skeleton recovery.  We ask a different question:
 can a partial symbolic program define a \emph{set} of valid videos rather than
 one trajectory?
 
-We propose SetHL-Wan.  Specified HL symbols are transmitted exactly, whereas a
+We propose SetHL-Wan.  Specified HL symbols are preserved exactly, whereas a
 temporal completion network represents each unspecified cell by a categorical
 posterior.  Samples are forward-kinematically spatialized and lifted to the
 control-latent interface of Wan~\cite{wan}.  Only low-rank adapters~\cite{lora}, the
@@ -124,7 +124,7 @@ mapped into this frame and assigned to its nearest member of the fixed
 \begin{equation}
  z_{t,b}=\arg\max_k\langle R_t^\top d_{t,b},c_k\rangle .
 \end{equation}
-The transmitted program contains $(M,M\odot z)$, wrist trajectories, palm
+The input program contains $(M,M\odot z)$, wrist trajectories, palm
 frames, and reference bone lengths.  It never contains per-joint image
 coordinates. Specified cells are one-hot, preventing continuous sub-cell
 information from leaking through soft labels. We interpret each symbol as its
