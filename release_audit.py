@@ -89,6 +89,23 @@ def audit(evidence_only: bool = False) -> list[str]:
     latent_manifest = HERE / "data_sources" / "wlasl" / "latents_hand256" / "manifest.jsonl"
     if latent_manifest.is_file():
         manifest_rows = [json.loads(line) for line in latent_manifest.read_text().splitlines()]
+        split_counts = {split: sum(row.get("split") == split for row in manifest_rows)
+                        for split in ("train", "val", "test")}
+        require(split_counts == {"train": 1579, "val": 404, "test": 269},
+                f"unexpected WLASL split counts: {split_counts}", failures)
+        for field in ("id", "source_clip", "path"):
+            values = [str(row.get(field)) for row in manifest_rows]
+            require(len(values) == len(set(values)) == 2252,
+                    f"manifest {field} values are not 2,252 unique entries", failures)
+        require(all(len(row.get("frame_indices", [])) == 17 and
+                    all(a < b for a, b in zip(row["frame_indices"],
+                                              row["frame_indices"][1:]))
+                    for row in manifest_rows),
+                "manifest clips are not strictly ordered 17-frame windows", failures)
+        if not evidence_only:
+            require(all((latent_manifest.parent / row["path"]).is_file()
+                        for row in manifest_rows),
+                    "one or more manifest latent files are missing", failures)
         expected_test_sources = {str(row["id"]) for row in manifest_rows
                                  if row.get("split") == "test"}
         require(len(expected_test_sources) == 269,
@@ -270,8 +287,30 @@ def audit(evidence_only: bool = False) -> list[str]:
             require(row.get("representation") == "sethl_center" and row.get("training_seed") == seed,
                     f"wrong center-ablation provenance in {path}", failures)
 
-    require(len(list((HERE / "results" / "final_completion").glob("*.json"))) == 45,
+    completion_root = HERE / "results" / "final_completion"
+    completion_reports = list(completion_root.glob("*.json"))
+    require(len(completion_reports) == 45,
             "final completion grid is not 45 reports", failures)
+    expected_completion = {(method, seed, policy)
+                           for method in ("continuous", "vq", "hardhl",
+                                          "sethl_nohier", "sethl")
+                           for seed in SEEDS
+                           for policy in ("distal", "finger", "interval")}
+    observed_completion = set()
+    for path in completion_reports:
+        row = json.loads(path.read_text())
+        match = re.search(r"_seed(\d+)_(distal|finger|interval)$", path.stem)
+        seed = int(match.group(1)) if match else None
+        policy = row.get("mask_policy")
+        method = row.get("representation")
+        observed_completion.add((method, seed, policy))
+        samples = row.get("per_sample", [])
+        require(row.get("split") == "test" and row.get("joint_noise") == 0.0 and
+                row.get("samples") == 269 and len(samples) == 269 and
+                {str(sample.get("id")) for sample in samples} == expected_test_sources,
+                f"wrong completion provenance or source set in {path}", failures)
+    require(observed_completion == expected_completion,
+            "completion method/seed/policy grid differs from lock", failures)
     require((HERE / "results" / "final_generation_summary.json").is_file(),
             "final generated-video summary is missing", failures)
     require((HERE / "results" / "final_denoising_sethl_vs_continuous_interval.json").is_file(),
