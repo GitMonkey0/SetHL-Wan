@@ -160,6 +160,7 @@ python summarize_generation_table.py \
   --temperature-selection results/temperature_validation/selection.json \
   --denoising-results results/final_denoising_sethl_vs_continuous_interval.json \
   --video-feature-results results/final_video_feature_consistency.json \
+  --finger-results results/final_generation_sethl_vs_continuous_finger.json \
   --output-json results/final_generation_summary.json --output-tex paper/results.tex
 
 cd paper && make

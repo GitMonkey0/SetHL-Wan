@@ -157,6 +157,50 @@ def audit(evidence_only: bool = False) -> list[str]:
             require(full_sources == expected_sources,
                     f"{method}/{seed}: full-control source set differs from lock", failures)
 
+    policy_selection_path = HERE / "results" / "policy_validation_selection.json"
+    require(policy_selection_path.is_file(), "mask-policy validation selection is missing", failures)
+    if policy_selection_path.is_file():
+        policy_selection = json.loads(policy_selection_path.read_text())
+        require(policy_selection.get("selection_split") == "val" and
+                policy_selection.get("selected_for_one_confirmatory_test") == "finger" and
+                policy_selection.get("frozen_before_test_generation") is True,
+                "finger robustness policy was not frozen on validation data", failures)
+    for method in ("sethl", "continuous"):
+        for seed in SEEDS:
+            root = HERE / "results" / "generated" / "finger" / f"{method}_seed{seed}"
+            generations = list(root.glob("sample_*/generation.json"))
+            reports = list(root.glob("sample_*.json"))
+            require(len(generations) == SOURCES,
+                    f"{method}/{seed}: incomplete finger-mask generation", failures)
+            require(len(reports) == SOURCES,
+                    f"{method}/{seed}: incomplete finger-mask reports", failures)
+            require({path.stem.removeprefix("sample_") for path in reports} == expected_indices,
+                    f"{method}/{seed}: finger-mask sample-index set differs from lock", failures)
+            for path in reports:
+                row = json.loads(path.read_text())
+                require(row.get("representation") == method and
+                        row.get("training_seed") == seed and
+                        row.get("videos") == 16,
+                        f"wrong finger-mask provenance in {path}", failures)
+            for path in generations:
+                row = json.loads(path.read_text())
+                require(row.get("representation") == method and
+                        row.get("training_seed") == seed and
+                        row.get("mask_policy") == "finger" and
+                        len(row.get("outputs", [])) == 16,
+                        f"wrong finger-mask generation provenance in {path}", failures)
+
+    finger_result_path = HERE / "results" / "final_generation_sethl_vs_continuous_finger.json"
+    require(finger_result_path.is_file(), "final finger-mask comparison is missing", failures)
+    if finger_result_path.is_file():
+        finger_result = json.loads(finger_result_path.read_text())
+        require(finger_result.get("method") == "sethl" and
+                finger_result.get("baseline") == "continuous",
+                "wrong finger-mask comparison provenance", failures)
+        for metric in finger_result.get("metrics", {}).values():
+            require(metric.get("paired_sources") == SOURCES,
+                    "finger-mask comparison is not paired over 27 sources", failures)
+
     for seed in SEEDS:
         root = HERE / "results" / "generated" / "interval" / f"sethl_center_seed{seed}"
         reports = list(root.glob("sample_*.json"))
@@ -225,7 +269,9 @@ def audit(evidence_only: bool = False) -> list[str]:
     results = (HERE / "paper" / "results.tex").read_text()
     require("pending" not in results.lower() and "{--}" not in results,
             "paper result macros still contain placeholders", failures)
-    for macro in ("VideoFeatureSet", "VideoFeatureCont", "VideoFeatureDelta", "VideoFeatureCI"):
+    for macro in ("VideoFeatureSet", "VideoFeatureCont", "VideoFeatureDelta", "VideoFeatureCI",
+                  "FingerHVDelta", "FingerHVCI", "FingerAccDelta", "FingerAngDelta",
+                  "FingerLeakDelta", "FingerDetectionDelta", "FingerAccelDelta"):
         require(f"\\newcommand{{\\{macro}}}" in results,
                 f"paper result macros omit {macro}", failures)
     manuscript = (HERE / "paper" / "main.tex").read_text()

@@ -115,6 +115,10 @@ reframed.
 - R3D-18 source-conditioned feature similarity was added after the locked
   analysis as a **post-hoc diagnostic**. It was not an endpoint, gate, stopping
   rule, or model-selection signal and cannot rescue the failed primary gate.
+- After the primary interval analysis, finger and distal masks were compared on
+  the fixed eight-source validation subset. The whole-finger mask was frozen
+  before a single three-seed test evaluation. This is reported only as a
+  secondary robustness check and does not alter the failed primary gate.
 
 ## Recorded protocol deviations
 

@@ -75,6 +75,15 @@ def test_complete_grid_generates_paper_macros(tmp_path, monkeypatch):
         "summary": {"sethl": {"mean": 0.9}, "continuous": {"mean": 0.8}},
         "comparisons": {"sethl_minus_continuous": {
             "mean": 0.1, "ci95": [0.05, 0.15]}}})
+    finger_metrics = {}
+    for metric in ("frontier_hypervolume", *METRICS):
+        finger_metrics[metric] = {
+            "method_mean": 1.0, "baseline_mean": 0.9,
+            "paired_delta": 0.1, "ci95": [0.05, 0.15],
+            "paired_sources": 2,
+        }
+    write_json(tmp_path / "finger.json", {
+        "method": "sethl", "baseline": "continuous", "metrics": finger_metrics})
     output_json, output_tex = tmp_path / "summary.json", tmp_path / "results.tex"
     monkeypatch.setattr(sys, "argv", ["summarize_generation_table.py",
         "--root", str(interval), "--full-root", str(full), "--subset", str(subset),
@@ -82,6 +91,7 @@ def test_complete_grid_generates_paper_macros(tmp_path, monkeypatch):
         "--temperature-selection", str(tmp_path / "temperature.json"),
         "--denoising-results", str(tmp_path / "denoising.json"),
         "--video-feature-results", str(tmp_path / "video_features.json"),
+        "--finger-results", str(tmp_path / "finger.json"),
         "--output-json", str(output_json), "--output-tex", str(output_tex),
         "--bootstrap", "100"])
     main()
@@ -99,3 +109,4 @@ def test_complete_grid_generates_paper_macros(tmp_path, monkeypatch):
     assert "\\newcommand{\\DenoiseCI}{[-0.2000, -0.0100]}" in macros
     assert "\\newcommand{\\DenoiseRelative}{50.00}" in macros
     assert "\\newcommand{\\VideoFeatureDelta}{0.100}" in macros
+    assert "\\newcommand{\\FingerAccDelta}{10.00}" in macros

@@ -778,5 +778,82 @@
         "paired_sources": 27
       }
     }
+  },
+  "finger_robustness": {
+    "method": "sethl",
+    "baseline": "continuous",
+    "metrics": {
+      "frontier_hypervolume": {
+        "method_mean": 6.821448724512698,
+        "baseline_mean": 6.576615733290303,
+        "paired_delta": 0.24483299122239566,
+        "ci95": [
+          -0.008744757130282456,
+          0.5120703933026199
+        ],
+        "paired_sources": 27
+      },
+      "specified_hl_accuracy": {
+        "method_mean": 0.5294815003641962,
+        "baseline_mean": 0.504713519913271,
+        "paired_delta": 0.02476798045092526,
+        "ci95": [
+          0.009667610683202463,
+          0.04164236559687803
+        ],
+        "paired_sources": 27
+      },
+      "specified_angular_deg": {
+        "method_mean": 28.95697951464005,
+        "baseline_mean": 31.103609121876,
+        "paired_delta": -2.1466296072359445,
+        "ci95": [
+          -3.7517575318062755,
+          -0.6780135506833049
+        ],
+        "paired_sources": 27
+      },
+      "hidden_pairwise_diversity_deg": {
+        "method_mean": 27.590126355979663,
+        "baseline_mean": 29.578736772753086,
+        "paired_delta": -1.9886104167734155,
+        "ci95": [
+          -4.243907975218423,
+          0.05604932555936308
+        ],
+        "paired_sources": 27
+      },
+      "specified_pairwise_symbol_disagreement": {
+        "method_mean": 0.4315965857678725,
+        "baseline_mean": 0.4689478367076489,
+        "paired_delta": -0.03735125093977638,
+        "ci95": [
+          -0.05847857287958448,
+          -0.017188937839411902
+        ],
+        "paired_sources": 27
+      },
+      "detection_rate": {
+        "method_mean": 0.797567174942405,
+        "baseline_mean": 0.7647058825342009,
+        "paired_delta": 0.03286129240820438,
+        "ci95": [
+          0.019607844891279567,
+          0.0461170131317627
+        ],
+        "paired_sources": 27
+      },
+      "temporal_acceleration_error": {
+        "method_mean": 0.7943971228705328,
+        "baseline_mean": 0.8802736165622869,
+        "paired_delta": -0.0858764936917542,
+        "ci95": [
+          -0.16470753277657713,
+          -0.020606356108400177
+        ],
+        "paired_sources": 27
+      }
+    },
+    "bootstrap_replicates": 10000
   }
 }

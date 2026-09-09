@@ -214,7 +214,9 @@ At inference we also disable within-cell residuals in the trained SetHL model,
 isolating their contribution without changing learned weights.
 Training samples masks that remove a distal joint set, one complete finger, or
 a contiguous temporal interval.  Standalone completion averages all three;
-the generated-video benchmark uses the predeclared interval mask. We report specified-symbol accuracy, specified angular error,
+the primary generated-video benchmark uses the predeclared interval mask. A
+secondary robustness policy is selected between finger and distal masks on the
+fixed eight-source validation subset, then evaluated once on the test set. We report specified-symbol accuracy, specified angular error,
 hidden-cell angular diversity, specified-cell symbol disagreement, hand
 detection, temporal acceleration error, and denoising MSE. The primary endpoint
 is the Pareto hypervolume dominated by compliance--localized-diversity operating
@@ -264,17 +266,12 @@ The paired SetHL--continuous difference in the primary endpoint is
 \PrimaryDelta{} (95\% CI \PrimaryCI); against VQ-26 it is
 \VQDelta{} (\VQCI). The predeclared HV-superiority criterion is therefore not
 met; SetHL nevertheless has the best accuracy and angular error among the
-matched 26-symbol controllers. Relative to the no-spherical-loss ablation, full SetHL
-changes HV by \SphericalDelta{} (\SphericalCI), specified accuracy by
-\SphericalAccDelta{} percentage points (\SphericalAccCI) and angular error by
-\SphericalAngDelta$^\circ$ (\SphericalAngCI). Center-only inference gives
-\CenterAUC{} HV; full SetHL differs by \CenterDelta{} (\CenterCI).
-Thus spherical geometry shifts the trade-off toward semantic compliance rather
-than uniformly increasing diversity, while within-cell residual sampling is
-secondary at this resolution.
-Hard HL reaches \HardAUC{} HV; full SetHL differs by \HardDelta{} (\HardCI),
-showing that diffusion noise already supplies substantial free-cell variation
-and that SetHL does not improve the aggregate frontier over hard symbols.
+matched 26-symbol controllers. Against the no-spherical-loss ablation, SetHL
+changes accuracy by \SphericalAccDelta{} points (\SphericalAccCI), angle by
+\SphericalAngDelta$^\circ$ (\SphericalAngCI), and HV by \SphericalDelta{}
+(\SphericalCI). Center-only and hard-HL inference reach \CenterAUC{} and
+\HardAUC{} HV, respectively, confirming that spherical geometry favors
+semantic compliance rather than uniformly increasing diversity.
 Relative to continuous control, SetHL changes specified accuracy by
 \ContAccDelta{} percentage points (\ContAccCI), angular error by \ContAngDelta$^\circ$
 (\ContAngCI), leakage by \ContLeakDelta{} points (\ContLeakCI), and detection
@@ -282,6 +279,13 @@ by \ContDetectionDelta{} points (\ContDetectionCI); its localized-diversity
 difference is \ContLocalizedDelta$^\circ$ (\ContLocalizedCI).
 Against learned VQ-26, SetHL changes specified accuracy by \VQAccDelta{} percentage points
 (\VQAccCI) and leakage by \VQLeakDelta{} points (\VQLeakCI).
+A validation-selected whole-finger mask reproduces the semantic advantage over
+continuous control: accuracy changes by \FingerAccDelta{} points (\FingerAccCI),
+angle by \FingerAngDelta$^\circ$ (\FingerAngCI), leakage by
+\FingerLeakDelta{} points (\FingerLeakCI), detection by
+\FingerDetectionDelta{} points (\FingerDetectionCI), and acceleration error by
+\FingerAccelDelta{} (\FingerAccelCI). Its HV change is \FingerHVDelta{}
+(\FingerHVCI), so frontier superiority remains unsupported.
 \FullControlSentence{} On all 269 test clips, interval-conditioned denoising
 MSE is \DenoiseSet{} for SetHL and \DenoiseCont{} for continuous control
 (paired change \DenoiseDelta{}, 95\% CI \DenoiseCI).

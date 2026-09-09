@@ -75,6 +75,7 @@ def main() -> None:
     parser.add_argument("--temperature-selection", type=Path, required=True)
     parser.add_argument("--denoising-results", type=Path, required=True)
     parser.add_argument("--video-feature-results", type=Path, required=True)
+    parser.add_argument("--finger-results", type=Path, required=True)
     parser.add_argument("--output-json", type=Path, required=True)
     parser.add_argument("--output-tex", type=Path, required=True)
     parser.add_argument("--bootstrap", type=int, default=10000)
@@ -153,6 +154,7 @@ def main() -> None:
     calibration = json.loads(args.temperature_selection.read_text())
     denoising = json.loads(args.denoising_results.read_text())
     video_features = json.loads(args.video_feature_results.read_text())
+    finger_results = json.loads(args.finger_results.read_text())
     selected_tag = calibration["selected"].removeprefix("temp")
     selected_temperature = float(selected_tag.replace("p", "."))
     comp_angle = completion_cont["metrics"]["hidden_angular_deg"]
@@ -166,7 +168,8 @@ def main() -> None:
               "completion": {"sethl_vs_continuous": completion_cont,
                              "sethl_vs_no_spherical": completion_spherical},
               "codebook": codebook, "posterior_temperature": calibration,
-              "denoising": denoising, "video_features": video_features}
+              "denoising": denoising, "video_features": video_features,
+              "finger_robustness": finger_results}
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(output, indent=2) + "\n")
 
@@ -205,6 +208,7 @@ def main() -> None:
     feature_sethl = video_features["summary"]["sethl"]["mean"]
     feature_cont = video_features["summary"]["continuous"]["mean"]
     feature_delta = video_features["comparisons"]["sethl_minus_continuous"]
+    finger_metrics = finger_results["metrics"]
     cont_secondary = secondary_comparisons["sethl_minus_continuous"]
     acc_delta = cont_secondary["specified_hl_accuracy"]
     angle_delta = cont_secondary["specified_angular_deg"]
@@ -266,6 +270,20 @@ def main() -> None:
         f"\\newcommand{{\\VideoFeatureCont}}{{{feature_cont:.3f}}}",
         f"\\newcommand{{\\VideoFeatureDelta}}{{{feature_delta['mean']:.3f}}}",
         f"\\newcommand{{\\VideoFeatureCI}}{{[{feature_delta['ci95'][0]:.3f}, {feature_delta['ci95'][1]:.3f}]}}",
+        f"\\newcommand{{\\FingerSetHV}}{{{finger_metrics['frontier_hypervolume']['method_mean']:.2f}}}",
+        f"\\newcommand{{\\FingerContHV}}{{{finger_metrics['frontier_hypervolume']['baseline_mean']:.2f}}}",
+        f"\\newcommand{{\\FingerHVDelta}}{{{finger_metrics['frontier_hypervolume']['paired_delta']:.2f}}}",
+        f"\\newcommand{{\\FingerHVCI}}{{[{finger_metrics['frontier_hypervolume']['ci95'][0]:.2f}, {finger_metrics['frontier_hypervolume']['ci95'][1]:.2f}]}}",
+        f"\\newcommand{{\\FingerAccDelta}}{{{fmt_pp(finger_metrics['specified_hl_accuracy']['paired_delta'])}}}",
+        f"\\newcommand{{\\FingerAccCI}}{{[{fmt_pp(finger_metrics['specified_hl_accuracy']['ci95'][0])}, {fmt_pp(finger_metrics['specified_hl_accuracy']['ci95'][1])}]}}",
+        f"\\newcommand{{\\FingerAngDelta}}{{{finger_metrics['specified_angular_deg']['paired_delta']:.2f}}}",
+        f"\\newcommand{{\\FingerAngCI}}{{[{finger_metrics['specified_angular_deg']['ci95'][0]:.2f}, {finger_metrics['specified_angular_deg']['ci95'][1]:.2f}]}}",
+        f"\\newcommand{{\\FingerLeakDelta}}{{{fmt_pp(finger_metrics['specified_pairwise_symbol_disagreement']['paired_delta'])}}}",
+        f"\\newcommand{{\\FingerLeakCI}}{{[{fmt_pp(finger_metrics['specified_pairwise_symbol_disagreement']['ci95'][0])}, {fmt_pp(finger_metrics['specified_pairwise_symbol_disagreement']['ci95'][1])}]}}",
+        f"\\newcommand{{\\FingerDetectionDelta}}{{{fmt_pp(finger_metrics['detection_rate']['paired_delta'])}}}",
+        f"\\newcommand{{\\FingerDetectionCI}}{{[{fmt_pp(finger_metrics['detection_rate']['ci95'][0])}, {fmt_pp(finger_metrics['detection_rate']['ci95'][1])}]}}",
+        f"\\newcommand{{\\FingerAccelDelta}}{{{finger_metrics['temporal_acceleration_error']['paired_delta']:.3f}}}",
+        f"\\newcommand{{\\FingerAccelCI}}{{[{finger_metrics['temporal_acceleration_error']['ci95'][0]:.3f}, {finger_metrics['temporal_acceleration_error']['ci95'][1]:.3f}]}}",
         (f"\\newcommand{{\\ResultSentence}}{{SetHL obtains "
          f"{fmt(summary['sethl']['frontier_hypervolume']['mean'])} hypervolume, versus "
          f"{fmt(summary['continuous']['frontier_hypervolume']['mean'])} for continuous "

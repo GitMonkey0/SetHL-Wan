@@ -52,6 +52,8 @@ RESULT_FILES = (
     "results/final_completion_sethl_vs_hardhl.json",
     "results/final_completion_sethl_vs_sethl_nohier.json",
     "results/final_generation_summary.json",
+    "results/final_generation_sethl_vs_continuous_finger.json",
+    "results/policy_validation_selection.json",
     "results/final_denoising_sethl_vs_continuous_interval.json",
     "results/final_video_feature_consistency.json",
     "results/temperature_validation/selection.json",
