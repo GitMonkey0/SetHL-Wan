@@ -115,3 +115,18 @@ reframed.
 - R3D-18 source-conditioned feature similarity was added after the locked
   analysis as a **post-hoc diagnostic**. It was not an endpoint, gate, stopping
   rule, or model-selection signal and cannot rescue the failed primary gate.
+
+## Recorded protocol deviations
+
+- The planned EgoGrasp cross-domain diagnostic was not run because no
+  license-compatible sample with the required paired partial-control metadata
+  was obtained. STB remained optional and was not used.
+- Sign-recognition consistency and identity similarity were not reported: the
+  experiment did not have a separately validated recognizer or identity model
+  whose training labels were independent of the tracker-derived evaluation.
+- FVD/FID-VID was not estimated from only 27 eligible source clips because the
+  resulting high-dimensional covariance estimate would be rank deficient and
+  unstable. The source-paired R3D cosine diagnostic is reported explicitly as
+  post-hoc instead; it is not substituted into the primary endpoint.
+- These omissions were fixed before manuscript finalization, affect no reported
+  endpoint, and do not change the failed preregistered superiority decision.
