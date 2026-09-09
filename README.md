@@ -39,6 +39,8 @@ validation, 269 test). WLASL RGB files are governed by their original license
 and are not redistributed. The backbone is
 `Wan2.1-Fun-V1.1-1.3B-Control`; its VAE and 1.3B backbone are frozen, while
 rank-16 LoRA, the completion network, and the compact control bridge train.
+All compared methods use zero text and CLIP embeddings, isolating first-frame
+and motion-control conditioning.
 
 ## Reproduction
 

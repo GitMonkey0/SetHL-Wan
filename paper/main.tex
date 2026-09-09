@@ -197,6 +197,8 @@ SetHL trains 21.85M parameters in total (LoRA plus its completion and lifting
 modules), while the matched continuous model trains 21.84M.
 With cached Wan-VAE latents, each 3,000-step seed takes about 28 minutes on one
 Ascend 910B2C NPU.
+Text and CLIP embeddings are fixed to zero for every method so the comparison
+isolates first-frame and motion-control conditioning.
 We select $\lambda_h=1$ from $\{0,0.25,1\}$ using validation data only.
 We likewise select posterior temperature \PosteriorTemperature{} from
 $\{1,1.5,2\}$ on eight fixed validation sources and share it across all
