@@ -28,7 +28,7 @@ accuracy over continuous and learned vector-quantized controls by 1.59 and 1.34
 points, and reduces leakage by 3.87 and 2.80 points. The primary
 compliance--diversity hypervolume differences are not significant, while
 conditional denoising MSE improves by \DenoiseRelative\% versus continuous
-control. These results establish structured partial constraints as an editable
+control. These results support structured partial constraints as an editable
 interface for video diffusion while separating controlled from free hand
 articulation.
 \end{abstract}
@@ -39,9 +39,11 @@ controllable video generation, hand motion, Hand Labanotation, diffusion models
 
 \section{Introduction}
 \label{sec:intro}
-Hand motion is both semantically dense and difficult to synthesize.  Existing
-controllers typically request every joint at every frame~\cite{controlnet,
-sparsectrl,motioni2v,motionctrl}.  Such a signal is suitable for reenactment, but it is a poor
+Hand motion is both semantically dense and difficult to synthesize.  Many
+pose-based controllers consume a complete joint trajectory, while sparse-control
+methods usually sparsify time or landmarks rather than letting authors declare
+which articulations are unconstrained~\cite{controlnet,sparsectrl,motioni2v,motionctrl}.
+Complete trajectories are suitable for reenactment, but form a poor
 authoring interface: a user may require an index finger to point inward during
 one interval while leaving the remaining articulation unspecified.  Treating
 missing coordinates as zeros or hallucinating a single completed skeleton
