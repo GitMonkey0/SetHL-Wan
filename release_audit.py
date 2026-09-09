@@ -16,6 +16,8 @@ import pymupdf
 HERE = Path(__file__).resolve().parent
 SEEDS = (2027, 2028, 2029)
 SOURCES = 27
+DIFFUSION_SEEDS = (0, 1, 2, 3)
+CONTROL_SCALES = (0.0, 0.5, 1.0, 1.5)
 MAIN_METHODS = ("raster", "continuous", "vq", "hardhl", "sethl_nohier", "sethl")
 RUNS = {
     "raster": "wlasl_hand_raster_seed{}",
@@ -43,6 +45,13 @@ def sha256(path: Path) -> str:
 def require(condition: bool, message: str, failures: list[str]) -> None:
     if not condition:
         failures.append(message)
+
+
+def has_exact_output_grid(report: dict, scales: tuple[float, ...]) -> bool:
+    expected = {(scale, seed) for scale in scales for seed in DIFFUSION_SEEDS}
+    observed = [(float(row.get("control_scale", float("nan"))), row.get("seed"))
+                for row in report.get("outputs", [])]
+    return len(observed) == len(expected) and set(observed) == expected
 
 
 def audit(evidence_only: bool = False) -> list[str]:
@@ -136,6 +145,14 @@ def audit(evidence_only: bool = False) -> list[str]:
                         f"invalid hypervolume in {path}", failures)
             require(report_sources == expected_sources,
                     f"{method}/{seed}: interval source set differs from lock", failures)
+            for path in generations:
+                row = json.loads(path.read_text())
+                require(row.get("representation") == method and
+                        row.get("training_seed") == seed and
+                        row.get("training_step") == 3000 and
+                        row.get("mask_policy") == "interval" and
+                        has_exact_output_grid(row, CONTROL_SCALES),
+                        f"wrong interval generation grid or provenance in {path}", failures)
 
     for method in ("sethl", "continuous"):
         for seed in SEEDS:
@@ -157,6 +174,14 @@ def audit(evidence_only: bool = False) -> list[str]:
                 require(row.get("videos") == 4, f"wrong full-control video count in {path}", failures)
             require(full_sources == expected_sources,
                     f"{method}/{seed}: full-control source set differs from lock", failures)
+            for path in generations:
+                row = json.loads(path.read_text())
+                require(row.get("representation") == method and
+                        row.get("training_seed") == seed and
+                        row.get("training_step") == 3000 and
+                        row.get("mask_policy") == "full" and
+                        has_exact_output_grid(row, (1.0,)),
+                        f"wrong full-control generation grid or provenance in {path}", failures)
 
     policy_selection_path = HERE / "results" / "policy_validation_selection.json"
     require(policy_selection_path.is_file(), "mask-policy validation selection is missing", failures)
@@ -187,8 +212,9 @@ def audit(evidence_only: bool = False) -> list[str]:
                 row = json.loads(path.read_text())
                 require(row.get("representation") == method and
                         row.get("training_seed") == seed and
+                        row.get("training_step") == 3000 and
                         row.get("mask_policy") == "finger" and
-                        len(row.get("outputs", [])) == 16,
+                        has_exact_output_grid(row, CONTROL_SCALES),
                         f"wrong finger-mask generation provenance in {path}", failures)
 
     finger_result_path = HERE / "results" / "final_generation_sethl_vs_continuous_finger.json"
