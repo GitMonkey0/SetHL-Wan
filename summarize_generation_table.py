@@ -74,6 +74,7 @@ def main() -> None:
     parser.add_argument("--codebook-results", type=Path, required=True)
     parser.add_argument("--temperature-selection", type=Path, required=True)
     parser.add_argument("--denoising-results", type=Path, required=True)
+    parser.add_argument("--video-feature-results", type=Path, required=True)
     parser.add_argument("--output-json", type=Path, required=True)
     parser.add_argument("--output-tex", type=Path, required=True)
     parser.add_argument("--bootstrap", type=int, default=10000)
@@ -151,6 +152,7 @@ def main() -> None:
     codebook = json.loads(args.codebook_results.read_text())
     calibration = json.loads(args.temperature_selection.read_text())
     denoising = json.loads(args.denoising_results.read_text())
+    video_features = json.loads(args.video_feature_results.read_text())
     selected_tag = calibration["selected"].removeprefix("temp")
     selected_temperature = float(selected_tag.replace("p", "."))
     comp_angle = completion_cont["metrics"]["hidden_angular_deg"]
@@ -164,7 +166,7 @@ def main() -> None:
               "completion": {"sethl_vs_continuous": completion_cont,
                              "sethl_vs_no_spherical": completion_spherical},
               "codebook": codebook, "posterior_temperature": calibration,
-              "denoising": denoising}
+              "denoising": denoising, "video_features": video_features}
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(output, indent=2) + "\n")
 
@@ -200,6 +202,9 @@ def main() -> None:
     denoise_mse = denoising["metrics"]["flow_mse"]
     denoise_relative_reduction = (
         -100.0 * denoise_mse["paired_delta"] / denoise_mse["baseline_mean"])
+    feature_sethl = video_features["summary"]["sethl"]["mean"]
+    feature_cont = video_features["summary"]["continuous"]["mean"]
+    feature_delta = video_features["comparisons"]["sethl_minus_continuous"]
     cont_secondary = secondary_comparisons["sethl_minus_continuous"]
     acc_delta = cont_secondary["specified_hl_accuracy"]
     angle_delta = cont_secondary["specified_angular_deg"]
@@ -257,6 +262,10 @@ def main() -> None:
         f"\\newcommand{{\\DenoiseDelta}}{{{denoise_mse['paired_delta']:.4f}}}",
         f"\\newcommand{{\\DenoiseCI}}{{[{denoise_mse['ci95'][0]:.4f}, {denoise_mse['ci95'][1]:.4f}]}}",
         f"\\newcommand{{\\DenoiseRelative}}{{{denoise_relative_reduction:.2f}}}",
+        f"\\newcommand{{\\VideoFeatureSet}}{{{feature_sethl:.3f}}}",
+        f"\\newcommand{{\\VideoFeatureCont}}{{{feature_cont:.3f}}}",
+        f"\\newcommand{{\\VideoFeatureDelta}}{{{feature_delta['mean']:.3f}}}",
+        f"\\newcommand{{\\VideoFeatureCI}}{{[{feature_delta['ci95'][0]:.3f}, {feature_delta['ci95'][1]:.3f}]}}",
         (f"\\newcommand{{\\ResultSentence}}{{SetHL obtains "
          f"{fmt(summary['sethl']['frontier_hypervolume']['mean'])} hypervolume, versus "
          f"{fmt(summary['continuous']['frontier_hypervolume']['mean'])} for continuous "

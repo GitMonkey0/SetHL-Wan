@@ -25,8 +25,9 @@ modify it.
 - `run_training_seed.sh`: exact per-method training recipe used in the paper.
 - `kinematic_spatializer.py`: certified within-HL-cell sampling and kinematics.
 - `generate_sethl_wan.py`: reproducible ancestral video generation.
-- `evaluate_completion.py`, `evaluate_denoising.py`, and
-  `evaluate_generated_videos.py`: held-out metrics.
+- `evaluate_completion.py`, `evaluate_denoising.py`,
+  `evaluate_generated_videos.py`, and `evaluate_video_features.py`: held-out
+  metrics and the explicitly post-hoc video-feature diagnostic.
 - `aggregate_generation_results.py`: paired source-level bootstrap.
 - `build_public_release.py`: whitelist-only, data-free repository export.
 - `paper/`: ICASSP manuscript and figures.
@@ -143,12 +144,22 @@ python aggregate_denoising_results.py \
   --method sethl --baseline continuous \
   --output results/final_denoising_sethl_vs_continuous_interval.json
 
+# Post-hoc source-consistency diagnostic at control scale 1.0. The official
+# torchvision R3D-18 Kinetics-400 V1 weights have SHA-256
+# b3b3357ead25631ec9c57362ff2128a92d0427e01e2cd184951a44380c3f2e9d.
+python evaluate_video_features.py \
+  --generation-root results/generated/interval \
+  --windows data_sources/wlasl/windows_hand256 \
+  --weights model_cache/hub/checkpoints/r3d_18-b3b3357e.pth \
+  --device npu:0 --output results/final_video_feature_consistency.json
+
 python summarize_generation_table.py \
   --root results/generated/interval --full-root results/generated/full \
   --subset results/generation_subset.json --completion-root results \
   --codebook-results results/codebook_test.json \
   --temperature-selection results/temperature_validation/selection.json \
   --denoising-results results/final_denoising_sethl_vs_continuous_interval.json \
+  --video-feature-results results/final_video_feature_consistency.json \
   --output-json results/final_generation_summary.json --output-tex paper/results.tex
 
 cd paper && make
@@ -170,5 +181,7 @@ intervals include zero. The manuscript therefore makes no frontier-superiority
 claim. It instead reports the supported result that SetHL improves specified
 HL accuracy and reduces specified-cell leakage against both continuous and
 VQ-26 controls, while reducing conditional denoising MSE against continuous
-control on all 269 test clips. `paper/results.tex` is generated directly from
+control on all 269 test clips. A source-conditioned R3D-18 similarity result is
+reported only as a post-hoc diagnostic and was not used for model selection.
+`paper/results.tex` is generated directly from
 the archived reports; no result is inferred from training loss.

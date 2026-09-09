@@ -71,12 +71,17 @@ def test_complete_grid_generates_paper_macros(tmp_path, monkeypatch):
     write_json(tmp_path / "denoising.json", {"metrics": {"flow_mse": {
         "method_mean": 0.1, "baseline_mean": 0.2, "paired_delta": -0.1,
         "ci95": [-0.2, -0.01]}}})
+    write_json(tmp_path / "video_features.json", {
+        "summary": {"sethl": {"mean": 0.9}, "continuous": {"mean": 0.8}},
+        "comparisons": {"sethl_minus_continuous": {
+            "mean": 0.1, "ci95": [0.05, 0.15]}}})
     output_json, output_tex = tmp_path / "summary.json", tmp_path / "results.tex"
     monkeypatch.setattr(sys, "argv", ["summarize_generation_table.py",
         "--root", str(interval), "--full-root", str(full), "--subset", str(subset),
         "--completion-root", str(tmp_path), "--codebook-results", str(tmp_path / "codebook.json"),
         "--temperature-selection", str(tmp_path / "temperature.json"),
         "--denoising-results", str(tmp_path / "denoising.json"),
+        "--video-feature-results", str(tmp_path / "video_features.json"),
         "--output-json", str(output_json), "--output-tex", str(output_tex),
         "--bootstrap", "100"])
     main()
@@ -93,3 +98,4 @@ def test_complete_grid_generates_paper_macros(tmp_path, monkeypatch):
     assert "\\newcommand{\\HardDelta}" in macros
     assert "\\newcommand{\\DenoiseCI}{[-0.2000, -0.0100]}" in macros
     assert "\\newcommand{\\DenoiseRelative}{50.00}" in macros
+    assert "\\newcommand{\\VideoFeatureDelta}{0.100}" in macros

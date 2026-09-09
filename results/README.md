@@ -10,6 +10,8 @@ frames, cached Wan latents, model checkpoints, or generated MP4 files.
 - `generated/{interval,full}/*/sample_*.json` are per-source reports. Training
   seeds are averaged within a source before any source-level bootstrap.
 - `denoising/{interval,full}/*.json` cover all 269 test sources.
+- `final_video_feature_consistency.json` records the explicitly post-hoc,
+  source-conditioned R3D-18 diagnostic at control scale 1.0.
 - `final_generation_summary.json` is the machine-readable source for
   `paper/results.tex`; the latter is never edited by hand.
 - `temperature_validation/selection.json` records validation-only posterior

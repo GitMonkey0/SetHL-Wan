@@ -20,7 +20,7 @@ ROOT_FILES = (
     "aggregate_generation_results.py", "aggregate_paired_results.py",
     "audit_wan_checkpoint.py", "cache_video_latents.py", "continuous_control_latent_bridge.py",
     "evaluate_codebooks.py", "evaluate_completion.py", "evaluate_denoising.py",
-    "evaluate_generated_videos.py", "evaluate_tracker_ceiling.py", "fit_vq_codebook.py",
+    "evaluate_generated_videos.py", "evaluate_tracker_ceiling.py", "evaluate_video_features.py", "fit_vq_codebook.py",
     "generate_sethl_wan.py",
     "hl_control_latent_bridge.py", "hl_programs.py", "hl_wan_adapter.py",
     "hl_wan_training_module.py", "kinematic_continuous_bridge.py",
@@ -53,6 +53,7 @@ RESULT_FILES = (
     "results/final_completion_sethl_vs_sethl_nohier.json",
     "results/final_generation_summary.json",
     "results/final_denoising_sethl_vs_continuous_interval.json",
+    "results/final_video_feature_consistency.json",
     "results/temperature_validation/selection.json",
 )
 

@@ -228,6 +228,9 @@ that both hands are tracked in at least 90\% of source frames.
 As an evaluator ceiling, re-encoding these real clips and rerunning the same
 tracker gives 92.81\% hand detection, 78.36\% HL agreement, and
 $10.24^\circ$ angular error against the archived pseudo-labels.
+As a post-hoc quality diagnostic, we also measure source-conditioned cosine
+similarity in the penultimate feature space of a Kinetics-400-pretrained
+R3D-18~\cite{r3d}; this metric was not used for model selection.
 
 \begin{table}[t]
 \caption{Interval partial-control results on the WLASL test split. Higher is better for
@@ -282,6 +285,9 @@ Against learned VQ-26, SetHL changes specified accuracy by \VQAccDelta{} percent
 \FullControlSentence{} On all 269 test clips, interval-conditioned denoising
 MSE is \DenoiseSet{} for SetHL and \DenoiseCont{} for continuous control
 (paired change \DenoiseDelta{}, 95\% CI \DenoiseCI).
+R3D feature similarity is \VideoFeatureSet{} versus \VideoFeatureCont{}
+(paired change \VideoFeatureDelta{}, 95\% CI \VideoFeatureCI), indicating no
+loss of source-level video consistency alongside the semantic gains.
 
 \textbf{Representation analysis.}
 On held-out directions, fixed HL has \HLQuantDeg{} mean quantization error,

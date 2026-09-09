@@ -112,3 +112,6 @@ reframed.
   non-inferiority passed. The paper consequently does not claim frontier
   superiority; it reports the supported semantic-compliance, leakage, and
   denoising results, including confidence intervals.
+- R3D-18 source-conditioned feature similarity was added after the locked
+  analysis as a **post-hoc diagnostic**. It was not an endpoint, gate, stopping
+  rule, or model-selection signal and cannot rescue the failed primary gate.

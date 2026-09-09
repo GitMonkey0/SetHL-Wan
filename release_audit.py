@@ -28,6 +28,7 @@ MANIFEST_SHA = "5693326da395d89911e91194a49a36e44342f43d4bc91762fcd282edd99f3dd7
 GENERATION_SUBSET_SHA = "adbd86ff74b7485f3e8dec3f43dde5fecd9e1d106e665c9f201f87d5483a8cf8"
 TEMPERATURE_SUBSET_SHA = "643c4f7c84ae84ecf161df8589ebc1059cc2256b3f4554a908a5fc277b25edfb"
 VQ_CODEBOOK_SHA = "862c60ff9f2b8071e364727933d8ac1e178e2c4cd21f542f5e74fe514dce2e1c"
+R3D_WEIGHTS_SHA = "b3b3357ead25631ec9c57362ff2128a92d0427e01e2cd184951a44380c3f2e9d"
 
 
 def sha256(path: Path) -> str:
@@ -174,6 +175,28 @@ def audit(evidence_only: bool = False) -> list[str]:
             "final generated-video summary is missing", failures)
     require((HERE / "results" / "final_denoising_sethl_vs_continuous_interval.json").is_file(),
             "final denoising comparison is missing", failures)
+    feature_path = HERE / "results" / "final_video_feature_consistency.json"
+    require(feature_path.is_file(), "final video-feature diagnostic is missing", failures)
+    if feature_path.is_file():
+        feature_text = feature_path.read_text()
+        require("NaN" not in feature_text and "Infinity" not in feature_text,
+                "video-feature diagnostic contains non-standard numbers", failures)
+        feature = json.loads(feature_text)
+        require(feature.get("weights_sha256") == R3D_WEIGHTS_SHA,
+                "video-feature diagnostic has wrong R3D weights hash", failures)
+        require(feature.get("control_scale") == 1.0,
+                "video-feature diagnostic has wrong control scale", failures)
+        for method in MAIN_METHODS:
+            row = feature.get("summary", {}).get(method, {})
+            require(row.get("sources") == SOURCES and row.get("videos") == 324,
+                    f"incomplete video-feature diagnostic for {method}", failures)
+        comparison = feature.get("comparisons", {}).get("sethl_minus_continuous", {})
+        require(comparison.get("paired_sources") == SOURCES,
+                "video-feature comparison is not paired over 27 sources", failures)
+    local_r3d = HERE / "model_cache" / "hub" / "checkpoints" / "r3d_18-b3b3357e.pth"
+    if local_r3d.is_file():
+        require(sha256(local_r3d) == R3D_WEIGHTS_SHA,
+                "local R3D-18 weights hash mismatch", failures)
     denoising = HERE / "results" / "denoising"
     for policy in ("interval", "full"):
         for method in MAIN_METHODS:
@@ -202,6 +225,9 @@ def audit(evidence_only: bool = False) -> list[str]:
     results = (HERE / "paper" / "results.tex").read_text()
     require("pending" not in results.lower() and "{--}" not in results,
             "paper result macros still contain placeholders", failures)
+    for macro in ("VideoFeatureSet", "VideoFeatureCont", "VideoFeatureDelta", "VideoFeatureCI"):
+        require(f"\\newcommand{{\\{macro}}}" in results,
+                f"paper result macros omit {macro}", failures)
     manuscript = (HERE / "paper" / "main.tex").read_text()
     for required_text in (
             "Haotian Lu", "Xiao-Ping Zhang", "Tsinghua University",
