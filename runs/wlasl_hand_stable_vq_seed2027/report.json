@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "steps": 3000,
+  "seed": 2027,
+  "examples": 1579,
+  "mask_policy": "mixed",
+  "representation": "vq",
+  "initial_loss": 0.8227213621139526,
+  "final_loss": 0.29719769954681396,
+  "last_20_mean_loss": 0.271953284740448,
+  "seconds": 1659.4096417427063,
+  "peak_allocated_bytes": 3699063296,
+  "trainable_parameters": 21847978,
+  "rank": 16,
+  "learning_rate": 0.0001,
+  "completion_learning_rate": 1e-05,
+  "wan_learning_rate": 1e-05,
+  "completion_init": "research/second_paper/runs/pretrain_vq_aw1_seed2027.pt",
+  "angular_weight": 1.0,
+  "latent_manifest_sha256": "5693326da395d89911e91194a49a36e44342f43d4bc91762fcd282edd99f3dd7",
+  "scope": "training run; quantitative generation evaluation required separately"
+}

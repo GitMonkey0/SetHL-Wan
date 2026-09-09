@@ -1,0 +1,74 @@
+{
+  "source": "10343",
+  "representation": "sethl",
+  "training_seed": 2027,
+  "training_step": 3000,
+  "videos": 4,
+  "per_video": [
+    {
+      "video": "10343_scale1p0_seed0.mp4",
+      "control_scale": 1.0,
+      "detection_rate": 1.0,
+      "specified_hl_accuracy": 0.8308823704719543,
+      "specified_angular_deg": 8.787531852722168,
+      "temporal_acceleration_error": 0.11008939892053604
+    },
+    {
+      "video": "10343_scale1p0_seed1.mp4",
+      "control_scale": 1.0,
+      "detection_rate": 1.0,
+      "specified_hl_accuracy": 0.820588231086731,
+      "specified_angular_deg": 9.281781196594238,
+      "temporal_acceleration_error": 0.1072782650589943
+    },
+    {
+      "video": "10343_scale1p0_seed2.mp4",
+      "control_scale": 1.0,
+      "detection_rate": 1.0,
+      "specified_hl_accuracy": 0.7764706015586853,
+      "specified_angular_deg": 10.871904373168945,
+      "temporal_acceleration_error": 0.13739953935146332
+    },
+    {
+      "video": "10343_scale1p0_seed3.mp4",
+      "control_scale": 1.0,
+      "detection_rate": 1.0,
+      "specified_hl_accuracy": 0.8058823347091675,
+      "specified_angular_deg": 8.789950370788574,
+      "temporal_acceleration_error": 0.10563664138317108
+    }
+  ],
+  "means": {
+    "detection_rate": 1.0,
+    "specified_hl_accuracy": 0.8084558844566345,
+    "specified_angular_deg": 9.432791948318481,
+    "hidden_pairwise_diversity_deg": null,
+    "specified_pairwise_symbol_disagreement": 0.09436274630328019,
+    "temporal_acceleration_error": 0.11510096117854118
+  },
+  "operating_point": {
+    "control_scale": 1.0,
+    "detection_rate": 1.0,
+    "specified_hl_accuracy": 0.8084558844566345,
+    "specified_angular_deg": 9.432791948318481,
+    "temporal_acceleration_error": 0.11510096117854118,
+    "specified_pairwise_diversity_deg": 5.039036393165588,
+    "specified_pairwise_symbol_disagreement": 0.09436274630328019,
+    "hidden_pairwise_diversity_deg": null,
+    "localized_diversity_deg": null
+  },
+  "frontier": [
+    {
+      "control_scale": 1.0,
+      "detection_rate": 1.0,
+      "specified_hl_accuracy": 0.8084558844566345,
+      "specified_angular_deg": 9.432791948318481,
+      "temporal_acceleration_error": 0.11510096117854118,
+      "specified_pairwise_diversity_deg": 5.039036393165588,
+      "specified_pairwise_symbol_disagreement": 0.09436274630328019,
+      "hidden_pairwise_diversity_deg": null,
+      "localized_diversity_deg": null
+    }
+  ],
+  "frontier_hypervolume": null
+}

@@ -1,0 +1,77 @@
+{
+  "method": "sethl",
+  "baseline": "continuous",
+  "metrics": {
+    "frontier_hypervolume": {
+      "method_mean": 8.587740274831592,
+      "baseline_mean": 8.939940708582043,
+      "paired_delta": -0.352200433750451,
+      "ci95": [
+        -1.0650111415849044,
+        0.3394252047055797
+      ],
+      "paired_sources": 27
+    },
+    "specified_hl_accuracy": {
+      "method_mean": 0.5286333090108302,
+      "baseline_mean": 0.5126841023081431,
+      "paired_delta": 0.015949206702687128,
+      "ci95": [
+        0.0048618368930930765,
+        0.02815185834389225
+      ],
+      "paired_sources": 27
+    },
+    "specified_angular_deg": {
+      "method_mean": 29.03741899243108,
+      "baseline_mean": 30.145170005751243,
+      "paired_delta": -1.1077510133201698,
+      "ci95": [
+        -2.300451249914405,
+        -0.03705982437104415
+      ],
+      "paired_sources": 27
+    },
+    "hidden_pairwise_diversity_deg": {
+      "method_mean": 30.190167820797047,
+      "baseline_mean": 35.33932439790341,
+      "paired_delta": -5.149156577106364,
+      "ci95": [
+        -8.692928592964945,
+        -1.8092421782458266
+      ],
+      "paired_sources": 27
+    },
+    "specified_pairwise_symbol_disagreement": {
+      "method_mean": 0.4246290939181674,
+      "baseline_mean": 0.46331189827295977,
+      "paired_delta": -0.038682804354792266,
+      "ci95": [
+        -0.06079982675749945,
+        -0.01723544552362689
+      ],
+      "paired_sources": 27
+    },
+    "detection_rate": {
+      "method_mean": 0.8000181558553452,
+      "baseline_mean": 0.7653413208914394,
+      "paired_delta": 0.03467683496390597,
+      "ci95": [
+        0.01942401917961738,
+        0.05029048623781607
+      ],
+      "paired_sources": 27
+    },
+    "temporal_acceleration_error": {
+      "method_mean": 0.8823112020069741,
+      "baseline_mean": 0.9896485112768448,
+      "paired_delta": -0.10733730926987073,
+      "ci95": [
+        -0.44955088365899676,
+        0.1542625143650705
+      ],
+      "paired_sources": 27
+    }
+  },
+  "bootstrap_replicates": 10000
+}

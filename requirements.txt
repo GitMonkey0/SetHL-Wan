@@ -1,0 +1,14 @@
+# Install torch/torch-npu from the Ascend distribution matching your CANN stack.
+# The reported runs used torch 2.9.0 and torch-npu 2.9.0.post1 on Ascend 910B2C.
+diffusers>=0.35,<0.42
+transformers==5.16.1
+peft==0.20.0
+omegaconf==2.3.1
+safetensors==0.8.0
+scikit-learn==1.8.0
+numpy==1.26.4
+opencv-python-headless==4.11.0.86
+scipy==1.17.1
+matplotlib==3.11.1
+PyMuPDF==1.28.2
+pytest>=9.0,<10

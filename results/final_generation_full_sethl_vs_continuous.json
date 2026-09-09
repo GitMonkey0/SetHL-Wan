@@ -1,0 +1,77 @@
+{
+  "method": "sethl",
+  "baseline": "continuous",
+  "metrics": {
+    "frontier_hypervolume": {
+      "method_mean": 10.611381715157991,
+      "baseline_mean": 7.4504489334445765,
+      "paired_delta": 3.1609327817134143,
+      "ci95": [
+        0.006526996889227791,
+        6.310878480631179
+      ],
+      "paired_sources": 6
+    },
+    "specified_hl_accuracy": {
+      "method_mean": 0.5292967820517075,
+      "baseline_mean": 0.5128946568540953,
+      "paired_delta": 0.016402125197612204,
+      "ci95": [
+        0.004448172110305329,
+        0.029625326906687316
+      ],
+      "paired_sources": 27
+    },
+    "specified_angular_deg": {
+      "method_mean": 28.988317305659073,
+      "baseline_mean": 30.65840502727179,
+      "paired_delta": -1.6700877216127186,
+      "ci95": [
+        -3.0958359029190046,
+        -0.4193378724433758
+      ],
+      "paired_sources": 27
+    },
+    "hidden_pairwise_diversity_deg": {
+      "method_mean": 67.38635774011965,
+      "baseline_mean": 57.550277303766315,
+      "paired_delta": 9.83608043635333,
+      "ci95": [
+        0.3365286897729967,
+        18.40283430064166
+      ],
+      "paired_sources": 6
+    },
+    "specified_pairwise_symbol_disagreement": {
+      "method_mean": 0.4303794306139519,
+      "baseline_mean": 0.4560265274250827,
+      "paired_delta": -0.025647096811130702,
+      "ci95": [
+        -0.046365123313234634,
+        -0.006094873543644761
+      ],
+      "paired_sources": 27
+    },
+    "detection_rate": {
+      "method_mean": 0.8029230199754237,
+      "baseline_mean": 0.7677015248272155,
+      "paired_delta": 0.03522149514820841,
+      "ci95": [
+        0.02015250466166088,
+        0.051652140184133145
+      ],
+      "paired_sources": 27
+    },
+    "temporal_acceleration_error": {
+      "method_mean": 0.7375072618839119,
+      "baseline_mean": 0.8416278425397145,
+      "paired_delta": -0.10412058065580242,
+      "ci95": [
+        -0.2479086993357987,
+        0.01970235148095995
+      ],
+      "paired_sources": 27
+    }
+  },
+  "bootstrap_replicates": 10000
+}

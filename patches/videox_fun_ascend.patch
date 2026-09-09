@@ -1,0 +1,18 @@
+diff --git a/videox_fun/models/wan_transformer3d.py b/videox_fun/models/wan_transformer3d.py
+index acf7192..8bf2d00 100755
+--- a/videox_fun/models/wan_transformer3d.py
++++ b/videox_fun/models/wan_transformer3d.py
+@@ -73,5 +73,6 @@ def rope_params(max_seq_len, dim, theta=10000):
+         1.0 / torch.pow(theta,
+                         torch.arange(0, dim, 2).to(torch.float64).div(dim)))
+     # Convert to complex form: exp(i * freq)
++    freqs = freqs.float()
+     freqs = torch.polar(torch.ones_like(freqs), freqs)
+     return freqs
+@@ -136,5 +137,6 @@ def get_1d_rotary_pos_embed_riflex(
+         return freqs_cos, freqs_sin
+     else:
+         # Lumina
++        freqs = freqs.float()
+         freqs_cis = torch.polar(torch.ones_like(freqs), freqs)  # Complex64     # [S, D/2]
+         return freqs_cis

@@ -1,0 +1,57 @@
+{
+  "locked_at": "2026-09-09T20:32:00+08:00",
+  "dataset": {
+    "name": "WLASL hand-focused 17-frame clips",
+    "manifest_sha256": "5693326da395d89911e91194a49a36e44342f43d4bc91762fcd282edd99f3dd7",
+    "split_counts": {"train": 1579, "validation": 404, "test": 269}
+  },
+  "model": "Wan2.1-Fun-V1.1-1.3B-Control",
+  "training": {
+    "steps": 3000,
+    "lora_rank": 16,
+    "wan_lora_lr": 1e-5,
+    "bridge_lr": 1e-4,
+    "completion_lr": {"default": 1e-4, "vq": 1e-5},
+    "seeds": [2027, 2028, 2029],
+    "mask_policy": "mixed",
+    "representations": [
+      "continuous", "vq", "hardhl", "sethl_nohier", "sethl", "raster"
+    ]
+  },
+  "generation": {
+    "subset_manifest_sha256": "adbd86ff74b7485f3e8dec3f43dde5fecd9e1d106e665c9f201f87d5483a8cf8",
+    "source_count": 27,
+    "mask_policy": "interval",
+    "diffusion_seeds": [0, 1, 2, 3],
+    "control_scales": [0.0, 0.5, 1.0, 1.5],
+    "inference_steps": 30
+  },
+  "inference_ablations": [
+    "sethl_center: disable within-cell residuals in the trained SetHL checkpoint"
+  ],
+  "posterior_calibration": {
+    "added_at": "2026-09-09T22:08:00+08:00",
+    "selection_split": "val",
+    "subset_manifest_sha256": "643c4f7c84ae84ecf161df8589ebc1059cc2256b3f4554a908a5fc277b25edfb",
+    "source_count": 8,
+    "candidate_temperatures": [1.0, 1.5, 2.0],
+    "selection_metric": "mean compliance_hidden_diversity_hypervolume",
+    "selected_temperature": 1.0,
+    "validation_scores": {"1.0": 11.485682709174043, "1.5": 10.5651954292638, "2.0": 8.96145812800351},
+    "test_use": "apply exactly the selected validation temperature to all probabilistic categorical methods (SetHL, VQ, and no-spherical) and all test seeds"
+  },
+  "primary_endpoint": {
+    "name": "compliance_hidden_diversity_hypervolume",
+    "reference_point": [0.0, 0.0],
+    "compliance": "specified-cell HL accuracy",
+    "diversity": "hidden-cell pairwise angular diversity times one minus specified-cell symbol disagreement times hand-detection rate",
+    "leakage_guard": "specified-cell pairwise HL-symbol disagreement",
+    "bootstrap_replicates": 10000,
+    "resampling_unit": "source video"
+  },
+  "falsification": {
+    "required_baselines": ["continuous", "vq"],
+    "primary_ci_excludes_zero": true,
+    "full_control_noninferiority_margin_accuracy_points": 0.01
+  }
+}

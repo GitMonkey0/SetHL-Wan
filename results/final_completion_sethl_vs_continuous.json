@@ -1,0 +1,32 @@
+{
+  "method": "sethl",
+  "baseline": "continuous",
+  "policies": [
+    "distal",
+    "finger",
+    "interval"
+  ],
+  "paired_sources": 269,
+  "training_replicates": 3,
+  "bootstrap_replicates": 10000,
+  "metrics": {
+    "hidden_angular_deg": {
+      "method_mean": 24.471483153382987,
+      "baseline_mean": 17.959499286945476,
+      "paired_delta": 6.511983866437513,
+      "ci95": [
+        6.259342610525819,
+        6.763909600417213
+      ]
+    },
+    "hidden_symbol_accuracy": {
+      "method_mean": 0.5471900503879328,
+      "baseline_mean": 0.6184915042259584,
+      "paired_delta": -0.07130145383802564,
+      "ci95": [
+        -0.07760650355229211,
+        -0.06515122833021235
+      ]
+    }
+  }
+}

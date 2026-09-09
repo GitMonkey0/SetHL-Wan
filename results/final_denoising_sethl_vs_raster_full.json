@@ -1,0 +1,42 @@
+{
+  "policy": "full",
+  "method": "sethl",
+  "baseline": "raster",
+  "training_seeds": [
+    2027,
+    2028,
+    2029
+  ],
+  "metrics": {
+    "flow_mse": {
+      "method_mean": 0.10227188800039592,
+      "baseline_mean": 0.0947919526467856,
+      "paired_delta": 0.007479935353610301,
+      "ci95": [
+        0.006705358578892364,
+        0.008306820940177078
+      ],
+      "paired_sources": 269
+    },
+    "zero_control_flow_mse": {
+      "method_mean": 0.13034708074646786,
+      "baseline_mean": 0.13071490854151063,
+      "paired_delta": -0.0003678277950427692,
+      "ci95": [
+        -0.000427044977563618,
+        -0.000310289934035183
+      ],
+      "paired_sources": 269
+    },
+    "control_gain": {
+      "method_mean": 0.02807519274607196,
+      "baseline_mean": 0.03592295589472503,
+      "paired_delta": -0.00784776314865307,
+      "ci95": [
+        -0.00867250487591128,
+        -0.007070388857837657
+      ],
+      "paired_sources": 269
+    }
+  }
+}

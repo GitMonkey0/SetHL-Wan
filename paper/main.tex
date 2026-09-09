@@ -1,0 +1,311 @@
+\documentclass{article}
+\usepackage{spconf,amsmath,amssymb,graphicx,booktabs,multirow}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{newtxtext,newtxmath}
+
+\title{SetHL: Partially Specified Hand Articulation Control for Video Diffusion}
+\name{Haotian Lu \qquad Xiao-Ping Zhang$^{\ast}$}
+\address{Tsinghua University\\
+haotialu666@gmail.com, xpzhang@ieee.org\thanks{$^{\ast}$Corresponding author.}}
+
+\input{results}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Pose-conditioned video generators normally interpret control as a complete
+trajectory.  This is unnecessarily rigid when an animator specifies only the
+semantically important fingers or time intervals.  We formulate
+\emph{partially specified hand control}: generated videos must obey named hand
+constraints while retaining variation elsewhere.  We introduce SetHL, a
+distribution-valued extension of Hand Labanotation (HL), and adapt a
+Wan2.1-Fun-Control 1.3B model with rank-16 LoRA.  A masked transformer completes
+unspecified symbols as distributions, and a certified in-cell sampler adds
+continuous variation without changing their HL labels. A differentiable
+hand-kinematic layer then maps them, without a joint-coordinate bypass, to
+Wan's control latent.
+Experiments on a quality-filtered WLASL subset compare fixed HL with matched
+continuous Gaussian, learned-vector-quantized, and hard-symbol controls under
+identical training budgets. We evaluate semantic compliance, diversity on
+user-declared free cells, leakage, and temporal quality with paired
+source-level bootstrap intervals. Across 27 test sources and three training
+seeds, SetHL improves specified-symbol accuracy by 1.59 and 1.34 percentage
+points over continuous and learned VQ controls, respectively, while reducing
+leakage by 3.87 and 2.80 points; neither compliance--diversity hypervolume
+difference is significant. On all 269 test clips, SetHL also reduces
+conditional denoising MSE by \DenoiseRelative\% relative to continuous control. This turns
+HL from a documentation format into an editable generative-video interface.
+\end{abstract}
+
+\begin{keywords}
+controllable video generation, hand motion, Hand Labanotation, diffusion models
+\end{keywords}
+
+\section{Introduction}
+\label{sec:intro}
+Hand motion is both semantically dense and difficult to synthesize.  Existing
+controllers typically request every joint at every frame~\cite{controlnet,
+sparsectrl,motioni2v,motionctrl}.  Such a signal is suitable for reenactment, but it is a poor
+authoring interface: a user may require an index finger to point inward during
+one interval while leaving the remaining articulation unspecified.  Treating
+missing coordinates as zeros or hallucinating a single completed skeleton
+confuses ``free to vary'' with ``fixed to an arbitrary estimate.''
+
+Hand Labanotation (HL)~\cite{li2024hl} provides a useful alternative.  It
+describes each of 20 hand-local bone directions by one of 26 interpretable
+spatial symbols.  The original work used HL for recognition, documentation,
+and approximate one-shot skeleton recovery.  We ask a different question:
+can a partial symbolic program define a \emph{set} of valid videos rather than
+one trajectory?
+
+We propose SetHL-Wan.  Specified HL symbols are transmitted exactly, whereas a
+temporal completion network represents each unspecified cell by a categorical
+posterior.  Samples are forward-kinematically spatialized and lifted to the
+control-latent interface of Wan~\cite{wan}.  Only low-rank adapters~\cite{lora}, the
+completion network, and the lifting module are trained.  Crucially, no dense
+joint coordinates bypass the symbolic stream.
+
+Our contributions are: (1) a task definition and metric that jointly measures
+constraint compliance and diversity localized to unconstrained hand parts;
+(2) a probabilistic extension of HL with certified symbol-preserving continuous
+samples, coupled to a differentiable kinematic Wan controller; and (3)
+matched-budget tests against continuous and learned-token
+alternatives, including structured missing-control and noise stress tests.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/method_overview.pdf}
+\caption{SetHL treats a partial hand instruction as a set rather than a single
+completed skeleton. Given HL cells are copied exactly; a masked transformer
+predicts distributions for free cells, which are sampled and spatialized by
+forward kinematics before conditioning a LoRA-adapted Wan model. Continuous
+within-cell samples preserve their selected HL symbol by construction.}
+\label{fig:method}
+\end{figure*}
+
+\section{Related Work}
+\label{sec:related}
+\textbf{Controllable video diffusion.}
+ControlNet~\cite{controlnet} established spatial conditioning for diffusion
+models, while SparseCtrl~\cite{sparsectrl} studied temporally sparse video
+conditions. Recent work conditions video models on pose or trajectories
+~\cite{motioni2v,motionctrl,wanmove,motionprompt}. Sparse 3-D hand control has
+also addressed occlusion and geometric fidelity~\cite{sparse3dhand}, but
+``sparse'' there describes landmarks or missing observations, not
+author-declared degrees of freedom. These methods seek one accurate motion
+trace; our target is selective constraint with localized residual variation.
+Learned 3-D motion and mesh tokens avoid rasterized controls
+~\cite{mtvcraft,meshtoken}, but encode complete motion with task-specific
+vocabularies rather than an interpretable, partially specified program.
+
+\textbf{Hand and sign generation.}
+WLASL~\cite{wlasl} enables large-scale word-level sign recognition.  Recent
+generators improve sign fidelity through pose adapters~\cite{signrefine} or
+compressed multimodal tokens~\cite{signvip}.  They motivate stronger hand
+evaluation, but do not expose a symbolic partial-control interface.
+
+\textbf{Symbolic hand motion.}
+HL~\cite{li2024hl} quantizes hand-local directions and is robust to small pose
+noise.  We retain its fixed semantics, but replace deterministic cell-center
+recovery with a posterior over unspecified cells and train it as a generative
+condition.  A learned 26-entry VQ codebook is included to test whether gains
+come merely from discretization.
+
+\section{Method}
+\label{sec:method}
+Let $X=(x_1,\ldots,x_T)$ be a video and $J_t\in\mathbb{R}^{2\times21\times3}$
+its two-hand landmarks.  The control mask $M\in\{0,1\}^{T\times2\times20}$
+indicates which bone-time cells the user specifies.
+
+\subsection{Partial Hand-Labanotation programs}
+For each hand we construct the palm frame $R_t$ from the wrist, index
+metacarpophalangeal joint, middle metacarpophalangeal joint, and little-finger
+metacarpophalangeal joint as in~\cite{li2024hl}.  A bone direction $d_{t,b}$ is
+mapped into this frame and assigned to its nearest member of the fixed
+26-direction codebook $C=\{c_k\}_{k=1}^{26}$:
+\begin{equation}
+ z_{t,b}=\arg\max_k\langle R_t^\top d_{t,b},c_k\rangle .
+\end{equation}
+The transmitted program contains $(M,M\odot z)$, wrist trajectories, palm
+frames, and reference bone lengths.  It never contains per-joint image
+coordinates. Specified cells are one-hot, preventing continuous sub-cell
+information from leaking through soft labels. We interpret each symbol as its
+spherical Voronoi cell rather than only its center.
+
+For missing cells, a transformer $q_\phi$ attends jointly over time, hands,
+and the 20-bone trees:
+\begin{equation}
+\begin{aligned}
+ q_{t,b}&=q_\phi(z_{\mathrm{obs}},M),\\
+ \mathcal L_{\mathrm{HL}}&=-\log q_{t,b}(z_{t,b})
+ +\lambda_h[1-\langle\bar c_{t,b},c_{z_{t,b}}\rangle].
+\end{aligned}
+\end{equation}
+where $\bar c$ is the normalized posterior mean.  The second term respects
+the geometry of nearby HL regions instead of treating all symbol mistakes as
+equally severe.
+
+\subsection{Kinematic control-latent lifting}
+A hard straight-through categorical sample first selects a center $c_z$. For
+unit $v\perp c_z$, we draw
+\begin{equation}
+ \tilde d=\cos\alpha\,c_z+\sin\alpha\,v,\quad
+ \alpha<\tfrac12\min_{j\ne z}\arccos(c_z^\top c_j).
+\end{equation}
+By the spherical triangle inequality, $c_z$ remains the nearest codeword. This
+gives continuous variation with a certificate that the HL instruction is
+unchanged. Forward
+kinematics reconstructs bone endpoints from wrist position, palm frame, and
+bone length. Bone tokens are bilinearly splatted along their 2-D
+segments and decoded by three small 3-D convolutions into a 16-channel latent
+$H_\psi(P)$ at Wan's temporal and spatial resolution.  We concatenate it with
+the first-frame latent, matching the native Wan-Control input contract.
+
+Given clean latent $v$, noise $\epsilon$, and flow-matching interpolation
+$v_\sigma=(1-\sigma)v+\sigma\epsilon$, we optimize
+\begin{equation}
+ \mathcal L=\|f_{\theta,\Delta}(v_\sigma,\sigma,H_\psi(P))
+ -(\epsilon-v)\|_2^2+0.1\mathcal L_{\mathrm{HL}},
+\end{equation}
+where the 1.3B Wan backbone $\theta$ is frozen and $\Delta$ denotes rank-16
+LoRA parameters. At inference, independent posterior samples alter the
+control trajectory only where the program permits it, while diffusion noise
+supplies appearance variation.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/qualitative.pdf}
+\caption{Generated-video comparison on the source at the median three-seed
+SetHL hypervolume (a deterministic selection rule). Teal mask cells are
+specified and gray cells are free; frames are taken at the center of the
+withheld interval. Columns show paired diffusion seeds under continuous and
+SetHL control.}
+\label{fig:qualitative}
+\end{figure*}
+
+\section{Experiments}
+\label{sec:experiments}
+\textbf{Data and protocol.}
+We use 2,252 WLASL videos with reliable MediaPipe Hands~\cite{mediapipe}
+tracks, retaining the official 1,579/404/269 train/validation/test partition.
+Each source video contributes exactly one 17-frame clip; no overlapping window
+crosses a split. Frames are resized to $256^2$. Every learned method uses
+the same Wan checkpoint, rank-16 LoRA, 3,000 updates, and three seeds.
+SetHL trains 21.85M parameters in total (LoRA plus its completion and lifting
+modules), while the matched continuous model trains 21.84M.
+With cached Wan-VAE latents, each 3,000-step seed takes about 28 minutes on one
+Ascend 910B2C NPU.
+We select $\lambda_h=1$ from $\{0,0.25,1\}$ using validation data only.
+We likewise select posterior temperature \PosteriorTemperature{} from
+$\{1,1.5,2\}$ on eight fixed validation sources and share it across all
+probabilistic categorical controls.
+
+\textbf{Baselines and metrics.}
+We compare continuous Gaussian directions, a training-set 26-entry VQ
+codebook, hard HL centers, SetHL without the spherical loss, and full SetHL.
+Continuous and raster controls retain exact observed geometry and therefore
+serve as information-richer upper bounds, while parameter counts and training
+updates remain matched.
+At inference we also disable within-cell residuals in the trained SetHL model,
+isolating their contribution without changing learned weights.
+Training samples masks that remove a distal joint set, one complete finger, or
+a contiguous temporal interval.  Standalone completion averages all three;
+the generated-video benchmark uses the predeclared interval mask. We report specified-symbol accuracy, specified angular error,
+hidden-cell angular diversity, specified-cell symbol disagreement, hand
+detection, temporal acceleration error, and denoising MSE. The primary endpoint
+is the Pareto hypervolume dominated by compliance--localized-diversity operating
+points (reference $(0,0)$) obtained by scaling the control latent. Localized
+diversity multiplies hidden-cell angular diversity by semantic agreement on
+specified cells and hand-detection rate. Thus semantic leakage and untrackable
+hands are penalized while legal angular variation inside an HL cell is not.
+Confidence intervals use 10,000 paired bootstrap resamples of source videos.
+Generated-video metrics use all 27 test clips meeting the fixed criterion
+that both hands are tracked in at least 90\% of source frames.
+As an evaluator ceiling, re-encoding these real clips and rerunning the same
+tracker gives 92.81\% hand detection, 78.36\% HL agreement, and
+$10.24^\circ$ angular error against the archived pseudo-labels.
+
+\begin{table}[t]
+\caption{Interval partial-control results on the WLASL test split. Higher is better for
+accuracy, localized diversity, and hypervolume; lower is better for angle. Values average
+three training seeds; bold marks the best 26-symbol method, and paired 95\%
+intervals are reported in text.}
+\label{tab:main}
+\centering
+\small
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{lcccc}
+\toprule
+Method & Acc.(\%)$\uparrow$ & Ang.$^\circ\downarrow$ & LocDiv$^\circ\uparrow$ & HV$\uparrow$\\
+\midrule
+\multicolumn{5}{l}{\emph{Information-rich controls}}\\
+Raster skeleton & \RasterAcc & \RasterAng & \RasterDiv & \RasterAUC\\
+Continuous Gauss. & \ContAcc & \ContAng & \ContDiv & \ContAUC\\
+\midrule
+\multicolumn{5}{l}{\emph{26-symbol controls}}\\
+Learned VQ-26 & \VQAcc & \VQAng & \VQDiv & \VQAUC\\
+Hard HL & \HardAcc & \HardAng & \HardDiv & \HardAUC\\
+SetHL w/o sph. loss & \NoHierAcc & \NoHierAng & \NoHierDiv & \NoHierAUC\\
+SetHL-Wan & \SetAcc & \SetAng & \SetDiv & \SetAUC\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Main results.}
+Table~\ref{tab:main} reports the locked comparison.  \ResultSentence{}
+The paired SetHL--continuous difference in the primary endpoint is
+\PrimaryDelta{} (95\% CI \PrimaryCI); against VQ-26 it is
+\VQDelta{} (\VQCI). The predeclared HV-superiority criterion is therefore not
+met; SetHL nevertheless has the best accuracy and angular error among the
+matched 26-symbol controllers. Relative to the no-spherical-loss ablation, full SetHL
+changes HV by \SphericalDelta{} (\SphericalCI), specified accuracy by
+\SphericalAccDelta{} percentage points (\SphericalAccCI) and angular error by
+\SphericalAngDelta$^\circ$ (\SphericalAngCI). Center-only inference gives
+\CenterAUC{} HV; full SetHL differs by \CenterDelta{} (\CenterCI).
+Thus spherical geometry shifts the trade-off toward semantic compliance rather
+than uniformly increasing diversity, while within-cell residual sampling is
+secondary at this resolution.
+Hard HL reaches \HardAUC{} HV; full SetHL differs by \HardDelta{} (\HardCI),
+showing that diffusion noise already supplies substantial free-cell variation
+and that SetHL does not improve the aggregate frontier over hard symbols.
+Relative to continuous control, SetHL changes specified accuracy by
+\ContAccDelta{} percentage points (\ContAccCI), angular error by \ContAngDelta$^\circ$
+(\ContAngCI), leakage by \ContLeakDelta{} points (\ContLeakCI), and detection
+by \ContDetectionDelta{} points (\ContDetectionCI); its localized-diversity
+difference is \ContLocalizedDelta$^\circ$ (\ContLocalizedCI).
+Against learned VQ-26, SetHL changes specified accuracy by \VQAccDelta{} percentage points
+(\VQAccCI) and leakage by \VQLeakDelta{} points (\VQLeakCI).
+\FullControlSentence{} On all 269 test clips, interval-conditioned denoising
+MSE is \DenoiseSet{} for SetHL and \DenoiseCont{} for continuous control
+(paired change \DenoiseDelta{}, 95\% CI \DenoiseCI).
+
+\textbf{Representation analysis.}
+On held-out directions, fixed HL has \HLQuantDeg{} mean quantization error,
+versus \VQQuantDeg{} for VQ-26.  Under coordinate noise $\sigma=0.005$, however,
+HL retains \HLStability{} of symbols compared with \VQStability{} for VQ.
+This separates geometric precision from stability and tests whether a learned
+vocabulary alone explains the result. Standalone masked completion favors the
+continuous model (\CompContAng$^\circ$/\CompContAcc\%) over SetHL
+(\CompSetAng$^\circ$/\CompSetAcc\%); the spherical term nevertheless reduces
+SetHL completion error by \CompSphericalGain$^\circ$. Thus the video comparison
+does not conflate set-valued control with nearest-trajectory imputation.
+
+\section{Conclusion}
+Partial hand instructions should define constraints, not prematurely collapse
+generation to one completed skeleton.  SetHL extends a fixed, interpretable
+notation into a distribution-valued controller for Wan.  Its value is tested
+by where variation occurs, not merely by whether generated motion is diverse.
+The present evaluation is limited to short, hand-focused WLASL clips and
+tracker-derived pseudo-labels; broader domains and human judgments remain
+future work.
+
+\section{Acknowledgment}
+OpenAI Codex assisted with manuscript drafting, analysis code, and figure
+scripting. The authors reviewed all outputs and take responsibility for the
+paper's content and results.
+
+\bibliographystyle{IEEEbib}
+\bibliography{refs}
+\end{document}
