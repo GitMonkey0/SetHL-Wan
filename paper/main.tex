@@ -221,6 +221,8 @@ diversity multiplies hidden-cell angular diversity by semantic agreement on
 specified cells and hand-detection rate. Thus semantic leakage and untrackable
 hands are penalized while legal angular variation inside an HL cell is not.
 Confidence intervals use 10,000 paired bootstrap resamples of source videos.
+Only the predeclared hypervolume test is confirmatory; secondary intervals are
+pointwise and unadjusted for multiplicity.
 Generated-video metrics use all 27 test clips meeting the fixed criterion
 that both hands are tracked in at least 90\% of source frames.
 As an evaluator ceiling, re-encoding these real clips and rerunning the same
