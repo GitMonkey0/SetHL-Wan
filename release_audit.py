@@ -249,8 +249,11 @@ def audit(evidence_only: bool = False) -> list[str]:
         pdf_inputs = [HERE / "paper" / name for name in
                       ("main.tex", "results.tex", "refs.bib",
                        "figures/method_overview.pdf", "figures/qualitative.pdf")]
-        require(all(pdf_path.stat().st_mtime >= path.stat().st_mtime for path in pdf_inputs),
-                "paper PDF is older than one or more source files", failures)
+        # Git does not preserve mtimes, so freshness is meaningful only in the
+        # full local reproduction tree, not in a newly cloned evidence release.
+        if not evidence_only:
+            require(all(pdf_path.stat().st_mtime >= path.stat().st_mtime for path in pdf_inputs),
+                    "paper PDF is older than one or more source files", failures)
         document = pymupdf.open(pdf_path)
         require(len(document) <= 5, f"paper has {len(document)} pages (maximum 5)", failures)
         for page_number, page in enumerate(document, start=1):
