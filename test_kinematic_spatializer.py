@@ -2,7 +2,8 @@ import torch
 
 from kinematic_spatializer import (hl_centers, posterior_moments,
                                    relaxed_hl_sample, sample_within_hl_cell,
-                                   spatialize_bimanual)
+                                   spatialize_bimanual,
+                                   support_preserving_log_probabilities)
 
 
 def test_spatializer_contract_and_gradient():
@@ -48,6 +49,14 @@ def test_relaxed_sample_is_unit_length_and_differentiable():
     assert torch.allclose(torch.linalg.vector_norm(sample, dim=-1), torch.ones(4), atol=1e-5)
     sample.sum().backward()
     assert logits.grad is not None and logits.grad.abs().sum() > 0
+
+
+def test_zero_probability_symbols_remain_outside_sampling_support():
+    posterior = torch.tensor([[0.75, 0.25, 0.0], [0.0, 0.0, 1.0]])
+    logits = support_preserving_log_probabilities(posterior)
+    assert torch.isneginf(logits[0, 2])
+    assert torch.isneginf(logits[1, :2]).all()
+    assert torch.equal(logits.isfinite(), posterior > 0)
 
 
 def test_within_cell_sample_preserves_symbol_varies_and_has_gradient():

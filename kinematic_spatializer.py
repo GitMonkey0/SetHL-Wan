@@ -38,13 +38,24 @@ def posterior_moments(posterior: Tensor, codebook: Tensor) -> tuple[Tensor, Tens
     return direction, concentration, covariance
 
 
+def support_preserving_log_probabilities(posterior: Tensor) -> Tensor:
+    """Convert probabilities to logits without reviving zero-probability symbols."""
+    if not posterior.is_floating_point():
+        raise ValueError("posterior must be floating point")
+    if bool((posterior < 0).any()) or bool((posterior.sum(-1) <= 0).any()):
+        raise ValueError("posterior must be nonnegative with nonempty support")
+    safe = posterior.clamp_min(torch.finfo(posterior.dtype).tiny).log()
+    return safe.masked_fill(posterior == 0, -torch.inf)
+
+
 def relaxed_hl_sample(posterior: Tensor, codebook: Tensor, temperature: float = 0.5,
                       hard: bool = False) -> Tensor:
     """Differentiable categorical direction sample for uncertainty training."""
     if temperature <= 0:
         raise ValueError("temperature must be positive")
     weights = torch.nn.functional.gumbel_softmax(
-        posterior.clamp_min(1e-8).log(), tau=temperature, hard=hard, dim=-1)
+        support_preserving_log_probabilities(posterior),
+        tau=temperature, hard=hard, dim=-1)
     return torch.nn.functional.normalize(weights @ codebook, dim=-1)
 
 
@@ -66,7 +77,8 @@ def sample_within_hl_cell(posterior: Tensor, codebook: Tensor,
     if posterior.shape[-1] != codebook.shape[0] or codebook.shape[-1] != 3:
         raise ValueError("posterior/codebook shape mismatch")
     weights = torch.nn.functional.gumbel_softmax(
-        posterior.clamp_min(1e-8).log(), tau=temperature, hard=True, dim=-1)
+        support_preserving_log_probabilities(posterior),
+        tau=temperature, hard=True, dim=-1)
     centre = torch.nn.functional.normalize(weights @ codebook, dim=-1)
 
     similarity = (codebook @ codebook.T).clamp(-1.0, 1.0)
