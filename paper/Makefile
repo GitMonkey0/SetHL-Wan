@@ -4,7 +4,7 @@ TECTONIC ?= tectonic
 
 all: main.pdf
 
-main.pdf: main.tex refs.bib results.tex figures/method_overview.pdf figures/qualitative.pdf spconf.sty IEEEbib.bst
+main.pdf: main.tex refs.bib results_content_disjoint.tex figures/method_overview.pdf figures/qualitative.pdf spconf.sty IEEEbib.bst
 	$(TECTONIC) --keep-logs main.tex
 
 package: main.pdf

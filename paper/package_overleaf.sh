@@ -7,11 +7,11 @@ archive=${1:-"$project_root/SetHL_ICASSP2027_Overleaf.zip"}
 
 cd "$paper_dir"
 "${TECTONIC:-tectonic}" main.tex --keep-logs
-python "$project_root/release_audit.py" --evidence-only
+python "$project_root/release_audit_content_disjoint.py" --evidence-only
 
 archive=$(realpath -m "$archive")
 rm -f "$archive"
-files=(main.tex results.tex refs.bib spconf.sty IEEEbib.bst \
+files=(main.tex results_content_disjoint.tex refs.bib spconf.sty IEEEbib.bst \
   figures/method_overview.pdf figures/qualitative.pdf)
 if command -v zip >/dev/null 2>&1; then
   zip -q "$archive" "${files[@]}"

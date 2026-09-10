@@ -35,9 +35,10 @@ modify it.
 ## Data and model
 
 The current protocol uses one 17-frame, 256-by-256 hand-focused clip per WLASL
-source video and preserves the official video-level split (1,579 train, 404
-validation, 269 test). WLASL RGB files are governed by their original license
-and are not redistributed. The backbone is
+source video. Exact decoded-RGB deduplication removes 193 records and prevents
+content overlap across the resulting 1,402/392/265 train/validation/test split.
+WLASL RGB files are governed by their original license and are not
+redistributed. The backbone is
 `Wan2.1-Fun-V1.1-1.3B-Control`; its VAE and 1.3B backbone are frozen, while
 rank-16 LoRA, the completion network, and the compact control bridge train.
 All compared methods use zero text and CLIP embeddings, isolating first-frame
@@ -84,22 +85,29 @@ components are installed.
 # Validate all manifests and implementation invariants.
 PYTHONPATH=. pytest -q
 
+# Remove exact decoded-RGB duplicates before fitting or training anything.
+python deduplicate_wlasl_rgb.py \
+  --windows data_sources/wlasl/windows_hand256 \
+  --latents data_sources/wlasl/latents_hand256 \
+  --source-manifest data_sources/wlasl/windows_hand256/manifest.jsonl \
+  --output data_sources/wlasl/latents_hand256_content_disjoint
+
 # Pretrain the masked SetHL completion model.
 python pretrain_completion.py \
-  --latents data_sources/wlasl/latents_hand256 \
+  --latents data_sources/wlasl/latents_hand256_content_disjoint \
   --representation sethl --angular-weight 1 --seed 2027 \
-  --output runs/pretrain_sethl_aw1_seed2027.pt
+  --output runs_content_disjoint/pretrain_sethl_aw1_seed2027.pt
 
 # Jointly train SetHL and Wan LoRA on one NPU.
 python train_sethl_wan.py \
-  --latents data_sources/wlasl/latents_hand256 \
+  --latents data_sources/wlasl/latents_hand256_content_disjoint \
   --representation sethl --steps 3000 --rank 16 --seed 2027 \
-  --completion-init runs/pretrain_sethl_aw1_seed2027.pt \
+  --completion-init runs_content_disjoint/pretrain_sethl_aw1_seed2027.pt \
   --angular-weight 1 --device npu:0 \
-  --output runs/wlasl_hand_cell_sethl_seed2027
+  --output runs_content_disjoint/wlasl_hand_cell_sethl_seed2027
 
 # Equivalent locked wrapper (repeat for seeds 2027, 2028, and 2029).
-bash run_training_seed.sh sethl 2027 0
+bash run_training_content_disjoint.sh sethl 2027 0
 ```
 
 Run matched commands for `continuous`, `vq`, `hardhl`, `sethl_nohier` (the
@@ -109,9 +117,10 @@ seeds are serialized with every generated sample. Statistical aggregation
 resamples source videos rather than treating diffusion samples as independent.
 
 The reported generation grid uses three training seeds, four paired diffusion
-seeds, four control scales, and all 27 test videos satisfying the locked
+seeds, four control scales, and all 25 test videos satisfying the locked
 two-hand visibility criterion. Posterior temperature is selected only on the
-eight-source validation manifest in `results/temperature_validation_subset.json`.
+eight-source validation manifest in
+`results/temperature_validation_subset_content_disjoint.json`.
 
 ## Reproduce the paper tables
 
@@ -120,19 +129,25 @@ test condition. The wrappers resume completed samples rather than overwriting
 them.
 
 ```bash
-bash run_temperature_validation.sh 0 runs/wlasl_hand_cell_sethl_seed2027
+export SETHL_LATENTS=$PWD/data_sources/wlasl/latents_hand256_content_disjoint
+export SETHL_SUBSET=$PWD/results/generation_subset_content_disjoint.json
+export SETHL_GENERATION_ROOT=$PWD/results/generated_content_disjoint
+export SETHL_CODEBOOK=$PWD/data_sources/wlasl/vq26_codebook_content_disjoint.pt
+export SETHL_TEMPERATURE_SUBSET=$PWD/results/temperature_validation_subset_content_disjoint.json
+export SETHL_TEMPERATURE_ROOT=$PWD/results/temperature_validation_content_disjoint
+export SETHL_DENOISING_ROOT=$PWD/results/denoising_content_disjoint
+
+bash run_temperature_validation.sh 0 runs_content_disjoint/wlasl_hand_cell_sethl_seed2027
 
 # Repeat each method for seeds 2027, 2028, and 2029 on available NPUs.
-bash run_generation_shard.sh sethl 2027 0 runs/wlasl_hand_cell_sethl_seed2027
-bash run_generation_shard.sh continuous 2027 0 runs/wlasl_hand_pre_continuous_seed2027
+bash run_generation_shard.sh sethl 2027 0 runs_content_disjoint/wlasl_hand_cell_sethl_seed2027
+bash run_generation_shard.sh continuous 2027 0 runs_content_disjoint/wlasl_hand_pre_continuous_seed2027
 
-# Full-control non-inferiority and the SetHL center-only inference ablation.
-bash run_generation_shard.sh sethl 2027 0 runs/wlasl_hand_cell_sethl_seed2027 full
-bash run_generation_shard.sh sethl_center 2027 0 \
-  runs/wlasl_hand_cell_sethl_seed2027 interval 1 sethl_center
+# Full-control comparison.
+bash run_generation_shard.sh sethl 2027 0 runs_content_disjoint/wlasl_hand_cell_sethl_seed2027 full
 
 # Held-out denoising evaluation (both interval and full policies).
-bash run_denoising_shard.sh sethl 2027 0 runs/wlasl_hand_cell_sethl_seed2027
+bash run_denoising_shard.sh sethl 2027 0 runs_content_disjoint/wlasl_hand_cell_sethl_seed2027
 ```
 
 After all six methods and three training seeds finish, aggregate at the source
@@ -140,31 +155,32 @@ video level and generate the LaTeX macros used verbatim by the paper:
 
 ```bash
 python aggregate_denoising_results.py \
-  --root results/denoising --policy interval \
+  --root results/denoising_content_disjoint --policy interval \
   --method sethl --baseline continuous \
-  --output results/final_denoising_sethl_vs_continuous_interval.json
+  --output results/final_denoising_sethl_vs_continuous_interval_content_disjoint.json
 
 # Post-hoc source-consistency diagnostic at control scale 1.0. The official
 # torchvision R3D-18 Kinetics-400 V1 weights have SHA-256
 # b3b3357ead25631ec9c57362ff2128a92d0427e01e2cd184951a44380c3f2e9d.
 python evaluate_video_features.py \
-  --generation-root results/generated/interval \
+  --generation-root results/generated_content_disjoint/interval \
   --windows data_sources/wlasl/windows_hand256 \
   --weights model_cache/hub/checkpoints/r3d_18-b3b3357e.pth \
-  --device npu:0 --output results/final_video_feature_consistency.json
+  --device npu:0 --output results/final_video_feature_consistency_content_disjoint.json
 
-python summarize_generation_table.py \
-  --root results/generated/interval --full-root results/generated/full \
-  --subset results/generation_subset.json --completion-root results \
-  --codebook-results results/codebook_test.json \
-  --temperature-selection results/temperature_validation/selection.json \
-  --denoising-results results/final_denoising_sethl_vs_continuous_interval.json \
-  --video-feature-results results/final_video_feature_consistency.json \
-  --finger-results results/final_generation_sethl_vs_continuous_finger.json \
-  --output-json results/final_generation_summary.json --output-tex paper/results.tex
+python summarize_content_disjoint.py \
+  --root results/generated_content_disjoint/interval \
+  --full-root results/generated_content_disjoint/full \
+  --subset results/generation_subset_content_disjoint.json \
+  --codebook-results results/codebook_test_content_disjoint.json \
+  --temperature-selection results/temperature_validation_content_disjoint/selection.json \
+  --denoising-results results/final_denoising_sethl_vs_continuous_interval_content_disjoint.json \
+  --video-feature-results results/final_video_feature_consistency_content_disjoint.json \
+  --output-json results/final_generation_summary_content_disjoint.json \
+  --output-tex paper/results_content_disjoint.tex
 
 cd paper && make
-cd .. && python release_audit.py --evidence-only
+cd .. && python release_audit_content_disjoint.py --evidence-only
 ```
 
 The distributed repository omits large checkpoints and RGB videos, so the
@@ -177,16 +193,13 @@ unrelated packages in a general-purpose NPU image.
 
 ## Current evidence policy
 
-The headline is accepted only if SetHL beats continuous Gaussian and learned
-VQ control on the predeclared compliance--hidden-diversity frontier with a
-paired 95% interval excluding zero, while fully specified semantic compliance
-is non-inferior within one percentage point. The locked evaluation did **not**
-pass the joint frontier-superiority gate: both interval-control hypervolume
-intervals include zero. The manuscript therefore makes no frontier-superiority
-claim. It instead reports the supported result that SetHL improves specified
-HL accuracy and reduces specified-cell leakage against both continuous and
-VQ-26 controls, while reducing conditional denoising MSE against continuous
-control on all 269 test clips. A source-conditioned R3D-18 similarity result is
-reported only as a post-hoc diagnostic and was not used for model selection.
-`paper/results.tex` is generated directly from
-the archived reports; no result is inferred from training loss.
+The locked evaluation did **not** pass the preregistered joint
+frontier-superiority gate, and the manuscript makes no such claim. The supported
+finding is more diagnostic: hard HL significantly improves compliance over
+continuous control but sacrifices localized diversity; probabilistic SetHL
+significantly recovers that diversity while retaining accuracy, leakage, and
+detection gains over continuous control. SetHL also reduces conditional
+denoising MSE on all 265 content-disjoint test clips. R3D-18 similarity is
+reported only as a post-hoc diagnostic. `paper/results_content_disjoint.tex` is
+generated directly from archived reports; no result is inferred from training
+loss.

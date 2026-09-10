@@ -1,9 +1,11 @@
 {
-  "locked_at": "2026-09-09T20:32:00+08:00",
+  "locked_at": "2026-09-10T08:40:00+08:00",
+  "supersedes": "the initial lock after an exact-RGB audit found duplicate content across official WLASL identifiers",
   "dataset": {
     "name": "WLASL hand-focused 17-frame clips",
-    "manifest_sha256": "5693326da395d89911e91194a49a36e44342f43d4bc91762fcd282edd99f3dd7",
-    "split_counts": {"train": 1579, "validation": 404, "test": 269}
+    "deduplication": "exact decoded-RGB SHA-256; priority test, validation, train; ID tie-break",
+    "manifest_sha256": "a2f304db7d7e5a60ec7556c206f2f75f44ba175041d5430c1c82683c5a33b15d",
+    "split_counts": {"train": 1402, "validation": 392, "test": 265}
   },
   "model": "Wan2.1-Fun-V1.1-1.3B-Control",
   "training": {
@@ -19,25 +21,23 @@
     ]
   },
   "generation": {
-    "subset_manifest_sha256": "adbd86ff74b7485f3e8dec3f43dde5fecd9e1d106e665c9f201f87d5483a8cf8",
-    "source_count": 27,
+    "subset_manifest_sha256": "b4afea51b7886e9d239b0c10ed50f8d9768d5fcf27e60682f5435b031e284104",
+    "source_count": 25,
     "mask_policy": "interval",
     "diffusion_seeds": [0, 1, 2, 3],
     "control_scales": [0.0, 0.5, 1.0, 1.5],
     "inference_steps": 30
   },
-  "inference_ablations": [
-    "sethl_center: disable within-cell residuals in the trained SetHL checkpoint"
-  ],
+  "inference_ablations": [],
   "posterior_calibration": {
     "added_at": "2026-09-09T22:08:00+08:00",
     "selection_split": "val",
-    "subset_manifest_sha256": "643c4f7c84ae84ecf161df8589ebc1059cc2256b3f4554a908a5fc277b25edfb",
+    "subset_manifest_sha256": "f9263226730c347d9c3d112e17bb743850989dd99d28b54e9b748b26f02157a8",
     "source_count": 8,
     "candidate_temperatures": [1.0, 1.5, 2.0],
     "selection_metric": "mean compliance_hidden_diversity_hypervolume",
-    "selected_temperature": 1.0,
-    "validation_scores": {"1.0": 11.485682709174043, "1.5": 10.5651954292638, "2.0": 8.96145812800351},
+    "selected_temperature": 2.0,
+    "validation_scores": {"1.0": 5.822088324887812, "1.5": 5.73485249476993, "2.0": 5.977786139053798},
     "test_use": "apply exactly the selected validation temperature to all probabilistic categorical methods (SetHL, VQ, and no-spherical) and all test seeds"
   },
   "primary_endpoint": {

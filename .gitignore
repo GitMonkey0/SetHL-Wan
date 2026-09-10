@@ -7,7 +7,12 @@ __pycache__/
 *.out
 *.zip
 
-data_sources/
+data_sources/**
+!data_sources/wlasl/
+!data_sources/wlasl/latents_hand256_content_disjoint/
+!data_sources/wlasl/latents_hand256_content_disjoint/manifest.jsonl
+!data_sources/wlasl/latents_hand256_content_disjoint/deduplication_report.json
+!data_sources/wlasl/vq26_codebook_content_disjoint.pt
 eval_vendor/
 runs/
 results/generated/

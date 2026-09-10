@@ -1,0 +1,42 @@
+{
+  "policy": "interval",
+  "method": "sethl",
+  "baseline": "continuous",
+  "training_seeds": [
+    2027,
+    2028,
+    2029
+  ],
+  "metrics": {
+    "flow_mse": {
+      "method_mean": 0.10305407476422049,
+      "baseline_mean": 0.10621858278613545,
+      "paired_delta": -0.003164508021914983,
+      "ci95": [
+        -0.0038363468946900755,
+        -0.0025036325008536155
+      ],
+      "paired_sources": 265
+    },
+    "zero_control_flow_mse": {
+      "method_mean": 0.13114526178180172,
+      "baseline_mean": 0.13189374748734556,
+      "paired_delta": -0.0007484857055438636,
+      "ci95": [
+        -0.0008341226288834016,
+        -0.0006638100697020505
+      ],
+      "paired_sources": 265
+    },
+    "control_gain": {
+      "method_mean": 0.02809118701758125,
+      "baseline_mean": 0.025675164701210125,
+      "paired_delta": 0.0024160223163711197,
+      "ci95": [
+        0.0017621598212903585,
+        0.0031045941432715396
+      ],
+      "paired_sources": 265
+    }
+  }
+}

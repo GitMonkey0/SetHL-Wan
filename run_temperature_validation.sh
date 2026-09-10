@@ -8,15 +8,16 @@ fi
 npu_index=$1
 checkpoint_dir=$2
 root=$(cd "$(dirname "$0")" && pwd)
-subset="$root/results/temperature_validation_subset.json"
-latents="$root/data_sources/wlasl/latents_hand256"
+subset="${SETHL_TEMPERATURE_SUBSET:-$root/results/temperature_validation_subset.json}"
+latents="${SETHL_LATENTS:-$root/data_sources/wlasl/latents_hand256}"
+validation_root="${SETHL_TEMPERATURE_ROOT:-$root/results/temperature_validation}"
 checkpoint="$checkpoint_dir/checkpoint-3000.pt"
 
 for temperature in 1 1.5 2; do
   tag=${temperature/./p}
   while read -r sample_index; do
-    generation="$root/results/temperature_validation/temp${tag}/sample_${sample_index}"
-    report="$root/results/temperature_validation/temp${tag}/sample_${sample_index}.json"
+    generation="$validation_root/temp${tag}/sample_${sample_index}"
+    report="$validation_root/temp${tag}/sample_${sample_index}.json"
     if [[ ! -f "$generation/generation.json" ]]; then
       python "$root/generate_sethl_wan.py" \
         --latents "$latents" --checkpoint "$checkpoint" --representation sethl \
@@ -30,7 +31,7 @@ for temperature in 1 1.5 2; do
   done < <(jq -r '.selected[].sample_index' "$subset")
 done
 
-python - "$root/results/temperature_validation" <<'PY'
+python - "$validation_root" <<'PY'
 import glob,json,sys
 from pathlib import Path
 import numpy as np

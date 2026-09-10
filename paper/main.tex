@@ -9,7 +9,7 @@
 \address{Tsinghua University\\
 haotialu666@gmail.com, xpzhang@ieee.org\thanks{$^{\ast}$Corresponding author.}}
 
-\input{results}
+\input{results_content_disjoint}
 
 \begin{document}
 \maketitle
@@ -18,18 +18,20 @@ haotialu666@gmail.com, xpzhang@ieee.org\thanks{$^{\ast}$Corresponding author.}}
 Pose-conditioned video generators assume complete trajectories, although users
 may specify only important fingers or intervals. We formulate
 \emph{partially specified hand control}: obey declared constraints while
-preserving variation elsewhere. SetHL extends Hand Labanotation (HL) from fixed
+preserving variation elsewhere. SetHL extends Hand Labanotation (HL) from
 symbols to distributions over unspecified cells. A masked transformer completes
 missing symbols, a certified in-cell sampler provides continuous variation
-without changing HL labels, and a kinematic layer drives a
-Wan2.1-Fun-Control 1.3B model trained with rank-16 LoRA. On quality-filtered
-WLASL, three-seed experiments show that SetHL improves specified-symbol
-accuracy over continuous and learned vector-quantized controls by 1.59 and 1.34
-points, and reduces leakage by 3.87 and 2.80 points. The primary
-compliance--diversity hypervolume differences are not significant, while
-conditional denoising MSE improves by \DenoiseRelative\% versus continuous
-control. These results support structured partial constraints as an editable
-video-diffusion interface that separates controlled from free hand articulation.
+without changing HL labels, and a kinematic layer drives rank-16 LoRA-adapted
+Wan2.1-Fun-Control 1.3B. On
+WLASL, three-seed experiments show that hard HL improves specified-symbol
+accuracy by 2.78 points and reduces angular error by $2.44^\circ$ versus
+continuous control, but reduces localized diversity by $1.68^\circ$. SetHL
+recovers $1.15^\circ$ of that diversity while retaining significant accuracy,
+leakage, and detection gains over continuous control. Its hypervolume gain is
+not significant, but conditional denoising MSE improves by 2.98\%. The
+results support structured partial
+constraints as an editable video-diffusion interface that separates controlled
+from free hand articulation.
 \end{abstract}
 
 \begin{keywords}
@@ -183,10 +185,13 @@ SetHL control.}
 \section{Experiments}
 \label{sec:experiments}
 \textbf{Data and protocol.}
-We use 2,252 WLASL videos with reliable MediaPipe Hands~\cite{mediapipe}
-tracks, retaining the official 1,579/404/269 train/validation/test partition.
-Each source video contributes exactly one 17-frame clip; no overlapping window
-crosses a split. Frames are resized to $256^2$. Every learned method uses
+We extract one 17-frame clip from each WLASL video with reliable MediaPipe
+Hands~\cite{mediapipe} tracks. Because different WLASL identifiers can decode
+to identical frames, we hash the decoded RGB tensors and retain one record per
+hash, prioritizing test, then validation, then train without consulting any
+outcome. This removes 193 duplicate records and yields 2,059 content-unique
+clips in a 1,402/392/265 train/validation/test partition; no RGB hash crosses a
+split. Frames are resized to $256^2$. Every learned method uses
 the same Wan checkpoint, rank-16 LoRA, 3,000 updates, and three seeds.
 SetHL trains 21.85M parameters in total (LoRA plus its completion and lifting
 modules), while the matched continuous model trains 21.84M.
@@ -205,13 +210,10 @@ codebook, hard HL centers, SetHL without the spherical loss, and full SetHL.
 Continuous and raster controls retain exact observed geometry and therefore
 serve as information-richer upper bounds, while parameter counts and training
 updates remain matched.
-At inference we also disable within-cell residuals in the trained SetHL model,
-isolating their contribution without changing learned weights.
 Training samples masks that remove a distal joint set, one complete finger, or
 a contiguous temporal interval.  Standalone completion averages all three;
-the primary generated-video benchmark uses the predeclared interval mask. A
-secondary robustness policy is selected between finger and distal masks on the
-fixed eight-source validation subset, then evaluated once on the test set. We report specified-symbol accuracy, specified angular error,
+the generated-video benchmark uses the predeclared interval mask. We report
+specified-symbol accuracy, specified angular error,
 hidden-cell angular diversity, specified-cell symbol disagreement, hand
 detection, temporal acceleration error, and denoising MSE. The primary endpoint
 is the Pareto hypervolume dominated by compliance--localized-diversity operating
@@ -222,11 +224,11 @@ hands are penalized while legal angular variation inside an HL cell is not.
 Confidence intervals use 10,000 paired bootstrap resamples of source videos.
 Only the predeclared hypervolume test is confirmatory; secondary intervals are
 pointwise and unadjusted for multiplicity.
-Generated-video metrics use all 27 test clips meeting the fixed criterion
+Generated-video metrics use all 25 test clips meeting the fixed criterion
 that both hands are tracked in at least 90\% of source frames.
 As an evaluator ceiling, re-encoding these real clips and rerunning the same
-tracker gives 92.81\% hand detection, 78.36\% HL agreement, and
-$10.24^\circ$ angular error against the archived pseudo-labels.
+tracker gives 92.94\% hand detection, 80.26\% HL agreement, and
+$9.06^\circ$ angular error against the archived pseudo-labels.
 As a post-hoc quality diagnostic, we also measure source-conditioned cosine
 similarity in the penultimate feature space of a Kinetics-400-pretrained
 R3D-18~\cite{r3d}; this metric was not used for model selection.
@@ -258,48 +260,47 @@ SetHL-Wan & \SetAcc & \SetAng & \SetDiv & \SetAUC\\
 \end{table}
 
 \textbf{Main results.}
-Table~\ref{tab:main} reports the locked comparison.  \ResultSentence{}
+Table~\ref{tab:main} reports the locked comparison.
 The paired SetHL--continuous difference in the primary endpoint is
 \PrimaryDelta{} (95\% CI \PrimaryCI); against VQ-26 it is
 \VQDelta{} (\VQCI). The predeclared HV-superiority criterion is therefore not
-met; SetHL nevertheless has the best accuracy and angular error among the
-matched 26-symbol controllers. Against the no-spherical-loss ablation, SetHL
+met. Against the no-spherical-loss ablation, SetHL
 changes accuracy by \SphericalAccDelta{} points (\SphericalAccCI), angle by
 \SphericalAngDelta$^\circ$ (\SphericalAngCI), and HV by \SphericalDelta{}
-(\SphericalCI). Center-only and hard-HL inference reach \CenterAUC{} and
-\HardAUC{} HV, respectively, confirming that spherical geometry favors
-semantic compliance rather than uniformly increasing diversity.
+(\SphericalCI).
 Relative to continuous control, SetHL changes specified accuracy by
 \ContAccDelta{} percentage points (\ContAccCI), angular error by \ContAngDelta$^\circ$
 (\ContAngCI), leakage by \ContLeakDelta{} points (\ContLeakCI), and detection
 by \ContDetectionDelta{} points (\ContDetectionCI); its localized-diversity
 difference is \ContLocalizedDelta$^\circ$ (\ContLocalizedCI).
-Against learned VQ-26, SetHL changes specified accuracy by \VQAccDelta{} percentage points
-(\VQAccCI) and leakage by \VQLeakDelta{} points (\VQLeakCI).
-A validation-selected whole-finger mask reproduces the semantic advantage over
-continuous control: accuracy changes by \FingerAccDelta{} points (\FingerAccCI),
-angle by \FingerAngDelta$^\circ$ (\FingerAngCI), leakage by
-\FingerLeakDelta{} points (\FingerLeakCI), detection by
-\FingerDetectionDelta{} points (\FingerDetectionCI), and acceleration error by
-\FingerAccelDelta{} (\FingerAccelCI). Its HV change is \FingerHVDelta{}
-(\FingerHVCI), so frontier superiority remains unsupported.
-\FullControlSentence{} On all 269 test clips, interval-conditioned denoising
-MSE is \DenoiseSet{} for SetHL and \DenoiseCont{} for continuous control
-(paired change \DenoiseDelta{}, 95\% CI \DenoiseCI).
-R3D feature similarity is \VideoFeatureSet{} versus \VideoFeatureCont{}
-(paired change \VideoFeatureDelta{}, 95\% CI \VideoFeatureCI), indicating no
-loss of source-level video consistency alongside the semantic gains.
+Against learned VQ-26, SetHL changes specified accuracy by \VQAccDelta{}
+percentage points (\VQAccCI) and leakage by \VQLeakDelta{} points
+(\VQLeakCI); neither interval excludes zero. Hard HL makes the tradeoff
+especially clear: versus continuous control it improves accuracy by
+\HardContAccDelta{} points (\HardContAccCI), angular error by
+\HardContAngDelta$^\circ$ (\HardContAngCI), and leakage by
+\HardContLeakDelta{} points (\HardContLeakCI), while losing
+\HardContLocalizedDelta$^\circ$ localized diversity
+(\HardContLocalizedCI). SetHL recovers \SetHardLocalizedDelta$^\circ$ of
+localized diversity over hard HL (\SetHardLocalizedCI), while its compliance
+accuracy and angular-error differences from hard HL are not significant; its
+specified-cell disagreement increases by 2.40 points (95\% CI
+$[0.84,3.97]$). Under fully specified control, SetHL accuracy is
+\FullSetAcc\% versus \FullContAcc\% for continuous control (paired difference
+\FullAccDelta{} points, 95\% CI \FullAccCI). On all 265 held-out clips,
+interval-conditioned denoising MSE is \DenoiseSet{} for SetHL and
+\DenoiseCont{} for continuous control, a \DenoiseRelative\% reduction; the
+paired change is \DenoiseDelta{} (95\% CI \DenoiseCI). R3D feature similarity
+is \VideoFeatureSet{} versus \VideoFeatureCont{} (paired change
+\VideoFeatureDelta{}, 95\% CI \VideoFeatureCI), indicating no loss
+of source-level video consistency alongside the semantic gains.
 
 \textbf{Representation analysis.}
 On held-out directions, fixed HL has \HLQuantDeg{} mean quantization error,
 versus \VQQuantDeg{} for VQ-26.  Under coordinate noise $\sigma=0.005$, however,
 HL retains \HLStability{} of symbols compared with \VQStability{} for VQ.
 This separates geometric precision from stability and tests whether a learned
-vocabulary alone explains the result. Standalone masked completion favors the
-continuous model (\CompContAng$^\circ$/\CompContAcc\%) over SetHL
-(\CompSetAng$^\circ$/\CompSetAcc\%); the spherical term nevertheless reduces
-SetHL completion error by \CompSphericalGain$^\circ$. Thus the video comparison
-does not conflate set-valued control with nearest-trajectory imputation.
+vocabulary alone explains the result.
 
 \section{Conclusion}
 Partial hand instructions should define constraints, not prematurely collapse

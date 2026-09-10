@@ -16,7 +16,7 @@ ROOT_FILES = (
     ".gitignore", "CITATION.cff", "DATA.md", "DESIGN_LOCK.md", "ENVIRONMENT.md",
     "LICENSE", "README.md", "experiment_lock.json", "pyproject.toml",
     "requirements.txt", "requirements-eval.txt",
-    "build_public_release.py",
+    "build_public_release.py", "deduplicate_wlasl_rgb.py",
     "aggregate_completion_results.py", "aggregate_denoising_results.py",
     "aggregate_generation_results.py", "aggregate_paired_results.py",
     "audit_wan_checkpoint.py", "cache_video_latents.py", "continuous_control_latent_bridge.py",
@@ -28,36 +28,36 @@ ROOT_FILES = (
     "kinematic_hl_bridge.py", "kinematic_spatializer.py", "masked_continuous_completion.py",
     "masked_hl_completion.py", "merge_latent_shards.py", "prepare_wlasl.py",
     "pretrain_completion.py", "raster_skeleton_bridge.py",
-    "release_audit.py", "select_generation_subset.py", "summarize_generation_table.py",
+    "release_audit_content_disjoint.py", "select_generation_subset.py",
+    "summarize_generation_table.py", "summarize_content_disjoint.py",
     "train_sethl_wan.py", "validate_manifest.py", "wan_adapter_wrapper.py",
     "wan_training_contract.py", "run_denoising_shard.sh", "run_generation_shard.sh",
-    "run_temperature_validation.sh", "run_training_seed.sh", "setup_videox_fun.sh",
+    "run_temperature_validation.sh", "run_training_seed.sh",
+    "run_training_content_disjoint.sh", "setup_videox_fun.sh",
 )
 
 PAPER_FILES = (
-    "paper/main.tex", "paper/results.tex", "paper/refs.bib", "paper/spconf.sty",
+    "paper/main.tex", "paper/results_content_disjoint.tex", "paper/refs.bib", "paper/spconf.sty",
     "paper/IEEEbib.bst", "paper/Makefile", "paper/package_overleaf.sh",
     "paper/make_method_figure.py", "paper/make_qualitative_figure.py",
     "paper/figures/method_overview.pdf", "paper/figures/method_overview.png",
     "paper/figures/qualitative.pdf", "paper/figures/qualitative.json", "paper/main.pdf",
     "patches/videox_fun_ascend.patch", "results/README.md",
-    "data_sources/wlasl/latents_hand256/manifest.jsonl",
-    "data_sources/wlasl/vq26_codebook.pt",
+    "data_sources/wlasl/latents_hand256_content_disjoint/manifest.jsonl",
+    "data_sources/wlasl/latents_hand256_content_disjoint/deduplication_report.json",
+    "data_sources/wlasl/vq26_codebook_content_disjoint.pt",
 )
 
 RESULT_FILES = (
-    "results/generation_subset.json", "results/temperature_validation_subset.json",
-    "results/codebook_test.json", "results/tracker_ceiling.json",
-    "results/final_completion_sethl_vs_continuous.json",
-    "results/final_completion_sethl_vs_vq.json",
-    "results/final_completion_sethl_vs_hardhl.json",
-    "results/final_completion_sethl_vs_sethl_nohier.json",
-    "results/final_generation_summary.json",
-    "results/final_generation_sethl_vs_continuous_finger.json",
-    "results/policy_validation_selection.json",
-    "results/final_denoising_sethl_vs_continuous_interval.json",
-    "results/final_video_feature_consistency.json",
-    "results/temperature_validation/selection.json",
+    "results/generation_subset_content_disjoint.json",
+    "results/temperature_validation_subset_content_disjoint.json",
+    "results/codebook_test_content_disjoint.json",
+    "results/tracker_ceiling_content_disjoint.json",
+    "results/final_generation_summary_content_disjoint.json",
+    "results/final_denoising_sethl_vs_continuous_interval_content_disjoint.json",
+    "results/final_denoising_sethl_vs_continuous_full_content_disjoint.json",
+    "results/final_video_feature_consistency_content_disjoint.json",
+    "results/temperature_validation_content_disjoint/selection.json",
 )
 
 
@@ -92,20 +92,14 @@ def main() -> None:
     relative_files.update(path.relative_to(ROOT) for path in ROOT.glob("test_*.py")
                           if path.name not in excluded_tests)
     relative_files.update(path.relative_to(ROOT) for path in
-                          (ROOT / "results" / "final_completion").glob("*.json"))
+                          (ROOT / "results" / "generated_content_disjoint").glob("**/*.json"))
     relative_files.update(path.relative_to(ROOT) for path in
-                          (ROOT / "results" / "generated").glob("**/*.json"))
-    relative_files.update(path.relative_to(ROOT) for path in
-                          (ROOT / "results" / "denoising").glob("**/*.json"))
-    for pattern in ("final_generation_*.json", "final_completion_*.json",
-                    "final_denoising_*.json"):
-        relative_files.update(path.relative_to(ROOT) for path in
-                              (ROOT / "results").glob(pattern))
+                          (ROOT / "results" / "denoising_content_disjoint").glob("**/*.json"))
     for pattern in ("wlasl_hand_raster_seed*", "wlasl_hand_pre_continuous_seed*",
                     "wlasl_hand_stable_vq_seed*", "wlasl_hand_pre_hardhl_seed*",
                     "wlasl_hand_cell_no_spherical_seed*", "wlasl_hand_cell_sethl_seed*"):
         relative_files.update(path.relative_to(ROOT) for path in
-                              (ROOT / "runs").glob(f"{pattern}/report.json"))
+                              (ROOT / "runs_content_disjoint").glob(f"{pattern}/report.json"))
 
     missing = [relative for relative in sorted(relative_files)
                if not (ROOT / relative).is_file()]

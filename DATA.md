@@ -23,18 +23,20 @@ python prepare_wlasl.py \
   --frames 17 --size 256 --padding 0.12 --crop-mode hands --min-visible 0.70
 ```
 
-Each source video contributes at most one uniformly sampled window and keeps
-its official train/validation/test label. The resulting 2,252-example split is
-1,579/404/269. After Wan-VAE caching, the authoritative latent manifest has
-SHA-256
-`5693326da395d89911e91194a49a36e44342f43d4bc91762fcd282edd99f3dd7`.
+Each source video contributes at most one uniformly sampled window. We hash the
+decoded 17-frame RGB tensor and retain one record per hash, with the fixed
+priority test, validation, train and an ID tie-break. This removes 193 exact
+duplicates, including every cross-split duplicate, and gives 2,059 clips in a
+1,402/392/265 train/validation/test split. The authoritative content-disjoint
+latent manifest has SHA-256
+`a2f304db7d7e5a60ec7556c206f2f75f44ba175041d5430c1c82683c5a33b15d`.
 The 26-entry VQ baseline codebook is fitted on training directions only; the
-released `vq26_codebook.pt` has SHA-256
-`862c60ff9f2b8071e364727933d8ac1e178e2c4cd21f542f5e74fe514dce2e1c`.
+released `vq26_codebook_content_disjoint.pt` has SHA-256
+`3bfbe6436169876e0ec3b97723ccfaeeda80909b98f7db97245c99c65f86fea5`.
 
 Generated-video evaluation uses every test example for which both source hands
-are visible in at least 90% of frames: 27 sources listed in the checked-in
-`results/generation_subset.json` (SHA-256
-`adbd86ff74b7485f3e8dec3f43dde5fecd9e1d106e665c9f201f87d5483a8cf8`).
+are visible in at least 90% of frames: 25 sources listed in the checked-in
+`results/generation_subset_content_disjoint.json` (SHA-256
+`b4afea51b7886e9d239b0c10ed50f8d9768d5fcf27e60682f5435b031e284104`).
 No source was selected by its generated result. Posterior calibration uses a
 separate fixed eight-source validation manifest.

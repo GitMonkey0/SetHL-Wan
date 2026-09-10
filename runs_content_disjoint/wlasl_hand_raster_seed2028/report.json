@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "steps": 3000,
+  "seed": 2028,
+  "examples": 1402,
+  "mask_policy": "mixed",
+  "representation": "raster",
+  "initial_loss": 0.09578674286603928,
+  "final_loss": 0.06479506939649582,
+  "last_20_mean_loss": 0.12057253122329711,
+  "seconds": 1590.3141648769379,
+  "peak_allocated_bytes": 3673886720,
+  "trainable_parameters": 21440720,
+  "rank": 16,
+  "learning_rate": 0.0001,
+  "completion_learning_rate": 0.0001,
+  "wan_learning_rate": 1e-05,
+  "completion_init": null,
+  "angular_weight": 0.25,
+  "latent_manifest_sha256": "a2f304db7d7e5a60ec7556c206f2f75f44ba175041d5430c1c82683c5a33b15d",
+  "scope": "training run; quantitative generation evaluation required separately"
+}

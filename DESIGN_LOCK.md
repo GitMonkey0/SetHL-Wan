@@ -97,16 +97,16 @@ reframed.
 
 - Actual Wan2.1-Fun-Control 1.3B NPU forward/backward: **passed**.
 - LoRA gradients: **480/480 finite** in the systems smoke test.
-- WLASL RGB/landmark preparation: **2,252 clips complete** with exact manifest
-  coverage and official 1,579/404/269 train/validation/test labels.
-- Hand-focused Wan-VAE latent cache: **2,252/2,252 complete** across eight
-  independently verified shards.
+- WLASL RGB/landmark preparation: **2,059 content-unique clips complete** after
+  exact decoded-RGB deduplication, with a 1,402/392/265
+  train/validation/test partition and no content hash crossing a split.
+- Hand-focused Wan-VAE latent cache: **2,059/2,059 complete**.
 - End-to-end Wan training: **18/18 primary runs complete** (six methods,
   three seeds, 3,000 updates each).
-- Actual Wan ancestral generation: **complete** for all locked interval,
-  full-control, and center-only conditions.
-- Denoising evaluation: **36/36 reports complete**, each covering all 269 test
-  sources.
+- Actual Wan ancestral generation: **complete** for the locked six-method
+  interval grid and SetHL/continuous full-control comparison.
+- Denoising evaluation: **12/12 reports complete**, each covering all 265 test
+  sources for SetHL and continuous under interval and full policies.
 - Falsification outcome: **the joint gate failed** because the interval-control
   hypervolume differences against continuous and VQ-26 include zero. Full-control
   non-inferiority passed. The paper consequently does not claim frontier
@@ -115,10 +115,8 @@ reframed.
 - R3D-18 source-conditioned feature similarity was added after the locked
   analysis as a **post-hoc diagnostic**. It was not an endpoint, gate, stopping
   rule, or model-selection signal and cannot rescue the failed primary gate.
-- After the primary interval analysis, finger and distal masks were compared on
-  the fixed eight-source validation subset. The whole-finger mask was frozen
-  before a single three-seed test evaluation. This is reported only as a
-  secondary robustness check and does not alter the failed primary gate.
+- The final reported analysis excludes the earlier center-only and mask-policy
+  explorations because they were not rerun after content deduplication.
 
 ## Recorded protocol deviations
 
@@ -128,7 +126,7 @@ reframed.
 - Sign-recognition consistency and identity similarity were not reported: the
   experiment did not have a separately validated recognizer or identity model
   whose training labels were independent of the tracker-derived evaluation.
-- FVD/FID-VID was not estimated from only 27 eligible source clips because the
+- FVD/FID-VID was not estimated from only 25 eligible source clips because the
   resulting high-dimensional covariance estimate would be rank deficient and
   unstable. The source-paired R3D cosine diagnostic is reported explicitly as
   post-hoc instead; it is not substituted into the primary endpoint.

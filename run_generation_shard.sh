@@ -14,16 +14,17 @@ mask_policy=${5:-interval}
 posterior_temperature=${6:-1}
 output_label=${7:-$representation}
 root=$(cd "$(dirname "$0")" && pwd)
-latents="$root/data_sources/wlasl/latents_hand256"
+latents="${SETHL_LATENTS:-$root/data_sources/wlasl/latents_hand256}"
 checkpoint="$checkpoint_dir/checkpoint-3000.pt"
-subset="$root/results/generation_subset.json"
-base="$root/results/generated/${mask_policy}/${output_label}_seed${training_seed}"
+subset="${SETHL_SUBSET:-$root/results/generation_subset.json}"
+generation_root="${SETHL_GENERATION_ROOT:-$root/results/generated}"
+base="$generation_root/${mask_policy}/${output_label}_seed${training_seed}"
 
 [[ -f "$checkpoint" ]] || { echo "missing checkpoint: $checkpoint" >&2; exit 1; }
 mapfile -t indices < <(jq -r '.selected[].sample_index' "$subset")
 extra=()
 if [[ "$representation" == "vq" ]]; then
-  extra=(--codebook "$root/data_sources/wlasl/vq26_codebook.pt")
+  extra=(--codebook "${SETHL_CODEBOOK:-$root/data_sources/wlasl/vq26_codebook.pt}")
 fi
 scales=(0 0.5 1 1.5)
 if [[ "$mask_policy" == "full" ]]; then

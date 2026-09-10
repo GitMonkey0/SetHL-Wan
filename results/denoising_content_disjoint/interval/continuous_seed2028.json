@@ -1,0 +1,2403 @@
+{
+  "representation": "continuous",
+  "split": "test",
+  "training_seed": 2028,
+  "training_step": 3000,
+  "joint_noise": 0.0,
+  "mask_policy": "interval",
+  "samples": 265,
+  "per_sample": [
+    {
+      "id": "01386",
+      "flow_mse": 0.11674471447865169,
+      "zero_control_flow_mse": 0.13717537373304367,
+      "control_gain": 0.020430659254391983,
+      "hidden_angular_deg": 32.341346740722656,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "01421",
+      "flow_mse": 0.1061272273461024,
+      "zero_control_flow_mse": 0.1336773857474327,
+      "control_gain": 0.027550158401330307,
+      "hidden_angular_deg": 22.903921127319336,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "01598",
+      "flow_mse": 0.09817882875601451,
+      "zero_control_flow_mse": 0.11944486200809479,
+      "control_gain": 0.021266033252080277,
+      "hidden_angular_deg": 34.00419235229492,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "01874",
+      "flow_mse": 0.08243200927972794,
+      "zero_control_flow_mse": 0.1000554586450259,
+      "control_gain": 0.017623449365297958,
+      "hidden_angular_deg": 17.748672485351562,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "02128",
+      "flow_mse": 0.05505666260917982,
+      "zero_control_flow_mse": 0.06214551751812299,
+      "control_gain": 0.007088854908943176,
+      "hidden_angular_deg": 11.639083862304688,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "02149",
+      "flow_mse": 0.10473355030020078,
+      "zero_control_flow_mse": 0.09702676037947337,
+      "control_gain": -0.007706789920727403,
+      "hidden_angular_deg": 39.305870056152344,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "02161",
+      "flow_mse": 0.08803122242291768,
+      "zero_control_flow_mse": 0.10820423563321431,
+      "control_gain": 0.02017301321029663,
+      "hidden_angular_deg": 27.46144676208496,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "02715",
+      "flow_mse": 0.06302867829799652,
+      "zero_control_flow_mse": 0.0706255945066611,
+      "control_gain": 0.007596916208664581,
+      "hidden_angular_deg": 33.098323822021484,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "03058",
+      "flow_mse": 0.1279171754916509,
+      "zero_control_flow_mse": 0.15752250452836355,
+      "control_gain": 0.029605329036712646,
+      "hidden_angular_deg": 33.63037109375,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "03382",
+      "flow_mse": 0.0929785892367363,
+      "zero_control_flow_mse": 0.10027730216582616,
+      "control_gain": 0.0072987129290898595,
+      "hidden_angular_deg": 15.495835304260254,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "03563",
+      "flow_mse": 0.05664870763818423,
+      "zero_control_flow_mse": 0.0657100925842921,
+      "control_gain": 0.009061384946107871,
+      "hidden_angular_deg": 36.887855529785156,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "04173",
+      "flow_mse": 0.13557691872119904,
+      "zero_control_flow_mse": 0.12921419243017832,
+      "control_gain": -0.0063627262910207205,
+      "hidden_angular_deg": 7.3805108070373535,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "04600",
+      "flow_mse": 0.1056940530737241,
+      "zero_control_flow_mse": 0.12548663467168808,
+      "control_gain": 0.019792581597963974,
+      "hidden_angular_deg": 39.79944610595703,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "04869",
+      "flow_mse": 0.1074994405110677,
+      "zero_control_flow_mse": 0.13192052642504373,
+      "control_gain": 0.02442108591397603,
+      "hidden_angular_deg": 26.0765380859375,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "04896",
+      "flow_mse": 0.13858065009117126,
+      "zero_control_flow_mse": 0.16136591881513596,
+      "control_gain": 0.02278526872396469,
+      "hidden_angular_deg": 40.14674377441406,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "05368",
+      "flow_mse": 0.07876238971948624,
+      "zero_control_flow_mse": 0.08901473383108775,
+      "control_gain": 0.010252344111601516,
+      "hidden_angular_deg": 18.861892700195312,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "05708",
+      "flow_mse": 0.0770501842101415,
+      "zero_control_flow_mse": 0.1018507940073808,
+      "control_gain": 0.024800609797239304,
+      "hidden_angular_deg": 28.667646408081055,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "05741",
+      "flow_mse": 0.07875332484642665,
+      "zero_control_flow_mse": 0.08158228794733684,
+      "control_gain": 0.0028289631009101868,
+      "hidden_angular_deg": 43.31671142578125,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "05778",
+      "flow_mse": 0.13700621326764426,
+      "zero_control_flow_mse": 0.17149339119593301,
+      "control_gain": 0.03448717792828876,
+      "hidden_angular_deg": 16.423341751098633,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "05917",
+      "flow_mse": 0.09340467303991318,
+      "zero_control_flow_mse": 0.10412534326314926,
+      "control_gain": 0.010720670223236084,
+      "hidden_angular_deg": 11.116142272949219,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "06432",
+      "flow_mse": 0.14076500137646994,
+      "zero_control_flow_mse": 0.17522302269935608,
+      "control_gain": 0.03445802132288614,
+      "hidden_angular_deg": 13.734563827514648,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "06553",
+      "flow_mse": 0.10173022995392482,
+      "zero_control_flow_mse": 0.119392196337382,
+      "control_gain": 0.017661966383457184,
+      "hidden_angular_deg": 18.653972625732422,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "06922",
+      "flow_mse": 0.09819171577692032,
+      "zero_control_flow_mse": 0.1135462298989296,
+      "control_gain": 0.015354514122009277,
+      "hidden_angular_deg": 30.718963623046875,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "07261",
+      "flow_mse": 0.09821571409702301,
+      "zero_control_flow_mse": 0.12245968232552211,
+      "control_gain": 0.0242439682284991,
+      "hidden_angular_deg": 16.648361206054688,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "07400",
+      "flow_mse": 0.07140458126862843,
+      "zero_control_flow_mse": 0.07554494465390842,
+      "control_gain": 0.004140363385279983,
+      "hidden_angular_deg": 40.47512435913086,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "07472",
+      "flow_mse": 0.13425684223572412,
+      "zero_control_flow_mse": 0.15783575425545374,
+      "control_gain": 0.023578912019729614,
+      "hidden_angular_deg": 40.474143981933594,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "07699",
+      "flow_mse": 0.09415185699860255,
+      "zero_control_flow_mse": 0.11161947250366211,
+      "control_gain": 0.017467615505059556,
+      "hidden_angular_deg": 46.62569808959961,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "08673",
+      "flow_mse": 0.06431677689154942,
+      "zero_control_flow_mse": 0.0732734389603138,
+      "control_gain": 0.008956662068764373,
+      "hidden_angular_deg": 56.22948455810547,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "08786",
+      "flow_mse": 0.060197899118065834,
+      "zero_control_flow_mse": 0.0639641551921765,
+      "control_gain": 0.0037662560741106715,
+      "hidden_angular_deg": 11.236495971679688,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "08824",
+      "flow_mse": 0.052566710859537125,
+      "zero_control_flow_mse": 0.06888491412003835,
+      "control_gain": 0.01631820326050122,
+      "hidden_angular_deg": 48.75027084350586,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "08846",
+      "flow_mse": 0.09609145671129227,
+      "zero_control_flow_mse": 0.13196319590012232,
+      "control_gain": 0.03587173918883005,
+      "hidden_angular_deg": 8.945880889892578,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "09576",
+      "flow_mse": 0.11735477298498154,
+      "zero_control_flow_mse": 0.16288751115401587,
+      "control_gain": 0.04553273816903433,
+      "hidden_angular_deg": 21.40302276611328,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "09917",
+      "flow_mse": 0.07869226609667142,
+      "zero_control_flow_mse": 0.09441287815570831,
+      "control_gain": 0.015720612059036895,
+      "hidden_angular_deg": 18.949954986572266,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "09936",
+      "flow_mse": 0.07835406561692555,
+      "zero_control_flow_mse": 0.08999995018045108,
+      "control_gain": 0.011645884563525527,
+      "hidden_angular_deg": 86.01921081542969,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "10102",
+      "flow_mse": 0.09127944707870483,
+      "zero_control_flow_mse": 0.09792385250329971,
+      "control_gain": 0.006644405424594879,
+      "hidden_angular_deg": 44.74144744873047,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "10343",
+      "flow_mse": 0.06791955232620239,
+      "zero_control_flow_mse": 0.07030338793992996,
+      "control_gain": 0.0023838356137275696,
+      "hidden_angular_deg": 12.522581100463867,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "10583",
+      "flow_mse": 0.1398584023118019,
+      "zero_control_flow_mse": 0.13389884928862253,
+      "control_gain": -0.005959553023179381,
+      "hidden_angular_deg": 12.373302459716797,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "10708",
+      "flow_mse": 0.057019419968128204,
+      "zero_control_flow_mse": 0.07629479095339775,
+      "control_gain": 0.019275370985269547,
+      "hidden_angular_deg": 17.279680252075195,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "11364",
+      "flow_mse": 0.08033570771416028,
+      "zero_control_flow_mse": 0.10038155565659206,
+      "control_gain": 0.020045847942431777,
+      "hidden_angular_deg": 39.99470520019531,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "11820",
+      "flow_mse": 0.1497962921857834,
+      "zero_control_flow_mse": 0.18309637159109116,
+      "control_gain": 0.03330007940530777,
+      "hidden_angular_deg": 22.885597229003906,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "11905",
+      "flow_mse": 0.17376953860123953,
+      "zero_control_flow_mse": 0.20557123919328055,
+      "control_gain": 0.031801700592041016,
+      "hidden_angular_deg": 37.057823181152344,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "12217",
+      "flow_mse": 0.08944220965107282,
+      "zero_control_flow_mse": 0.09272818888227145,
+      "control_gain": 0.003285979231198638,
+      "hidden_angular_deg": 16.05677604675293,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "12603",
+      "flow_mse": 0.11373224357763927,
+      "zero_control_flow_mse": 0.13206723829110464,
+      "control_gain": 0.018334994713465377,
+      "hidden_angular_deg": 46.38253402709961,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "12819",
+      "flow_mse": 0.10791294525067012,
+      "zero_control_flow_mse": 0.13422467559576035,
+      "control_gain": 0.026311730345090226,
+      "hidden_angular_deg": 50.17184829711914,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "13174",
+      "flow_mse": 0.11329036951065063,
+      "zero_control_flow_mse": 0.13186058898766836,
+      "control_gain": 0.01857021947701773,
+      "hidden_angular_deg": 34.093170166015625,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "14126",
+      "flow_mse": 0.08522886286179225,
+      "zero_control_flow_mse": 0.09252816438674927,
+      "control_gain": 0.0072993015249570165,
+      "hidden_angular_deg": 40.25074768066406,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "14673",
+      "flow_mse": 0.07643509656190872,
+      "zero_control_flow_mse": 0.10603061566750209,
+      "control_gain": 0.029595519105593368,
+      "hidden_angular_deg": 39.778316497802734,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "14839",
+      "flow_mse": 0.07356044525901477,
+      "zero_control_flow_mse": 0.07239166895548503,
+      "control_gain": -0.0011687763035297394,
+      "hidden_angular_deg": 22.933063507080078,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "15110",
+      "flow_mse": 0.11171560237805049,
+      "zero_control_flow_mse": 0.1453364690144857,
+      "control_gain": 0.033620866636435195,
+      "hidden_angular_deg": 20.001232147216797,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "15140",
+      "flow_mse": 0.098383163412412,
+      "zero_control_flow_mse": 0.11092198640108109,
+      "control_gain": 0.012538822988669082,
+      "hidden_angular_deg": 24.15447425842285,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "15321",
+      "flow_mse": 0.10920691241820653,
+      "zero_control_flow_mse": 0.13744825373093286,
+      "control_gain": 0.028241341312726334,
+      "hidden_angular_deg": 17.13933563232422,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "15632",
+      "flow_mse": 0.09674836198488872,
+      "zero_control_flow_mse": 0.12534883121649423,
+      "control_gain": 0.028600469231605516,
+      "hidden_angular_deg": 51.126434326171875,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "15827",
+      "flow_mse": 0.09818762292464574,
+      "zero_control_flow_mse": 0.11397044360637665,
+      "control_gain": 0.01578282068173091,
+      "hidden_angular_deg": 47.82494354248047,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "16061",
+      "flow_mse": 0.0865018864472707,
+      "zero_control_flow_mse": 0.1065736065308253,
+      "control_gain": 0.020071720083554595,
+      "hidden_angular_deg": 29.390697479248047,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "16336",
+      "flow_mse": 0.08665234843889873,
+      "zero_control_flow_mse": 0.10189828773339589,
+      "control_gain": 0.015245939294497163,
+      "hidden_angular_deg": 17.423133850097656,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "17157",
+      "flow_mse": 0.11781461536884308,
+      "zero_control_flow_mse": 0.15318488329648972,
+      "control_gain": 0.03537026792764664,
+      "hidden_angular_deg": 48.80024719238281,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "17456",
+      "flow_mse": 0.0622004804511865,
+      "zero_control_flow_mse": 0.07940854380528133,
+      "control_gain": 0.017208063354094826,
+      "hidden_angular_deg": 32.315311431884766,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "18169",
+      "flow_mse": 0.08037081360816956,
+      "zero_control_flow_mse": 0.0969318225979805,
+      "control_gain": 0.016561008989810944,
+      "hidden_angular_deg": 23.555238723754883,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "18307",
+      "flow_mse": 0.12090068310499191,
+      "zero_control_flow_mse": 0.16358382254838943,
+      "control_gain": 0.04268313944339752,
+      "hidden_angular_deg": 28.339176177978516,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "18371",
+      "flow_mse": 0.11700412382682164,
+      "zero_control_flow_mse": 0.13377260913451514,
+      "control_gain": 0.016768485307693495,
+      "hidden_angular_deg": 36.82890319824219,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "18523",
+      "flow_mse": 0.05376239990194639,
+      "zero_control_flow_mse": 0.062147522966066994,
+      "control_gain": 0.008385123064120606,
+      "hidden_angular_deg": 13.037520408630371,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "18880",
+      "flow_mse": 0.07518911237517993,
+      "zero_control_flow_mse": 0.07679842909177144,
+      "control_gain": 0.0016093167165915079,
+      "hidden_angular_deg": 13.686317443847656,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "19115",
+      "flow_mse": 0.06569143508871396,
+      "zero_control_flow_mse": 0.06929239009817441,
+      "control_gain": 0.0036009550094604492,
+      "hidden_angular_deg": 10.814699172973633,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "19410",
+      "flow_mse": 0.12267211824655533,
+      "zero_control_flow_mse": 0.14909538129965463,
+      "control_gain": 0.026423263053099305,
+      "hidden_angular_deg": 20.115032196044922,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "19688",
+      "flow_mse": 0.07713333393136661,
+      "zero_control_flow_mse": 0.10079881424705188,
+      "control_gain": 0.023665480315685272,
+      "hidden_angular_deg": 14.946696281433105,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "20067",
+      "flow_mse": 0.10027364641427994,
+      "zero_control_flow_mse": 0.11766869326432546,
+      "control_gain": 0.017395046850045517,
+      "hidden_angular_deg": 36.542625427246094,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "20390",
+      "flow_mse": 0.13425873219966888,
+      "zero_control_flow_mse": 0.15061920136213303,
+      "control_gain": 0.016360469162464142,
+      "hidden_angular_deg": 27.427736282348633,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "21491",
+      "flow_mse": 0.05057305283844471,
+      "zero_control_flow_mse": 0.04817818726102511,
+      "control_gain": -0.002394865577419601,
+      "hidden_angular_deg": 15.758427619934082,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "21944",
+      "flow_mse": 0.08408911526203156,
+      "zero_control_flow_mse": 0.09653910746177037,
+      "control_gain": 0.012449992199738816,
+      "hidden_angular_deg": 10.686634063720703,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "22415",
+      "flow_mse": 0.06646869207421939,
+      "zero_control_flow_mse": 0.06914725402990977,
+      "control_gain": 0.002678561955690384,
+      "hidden_angular_deg": 55.012969970703125,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "22926",
+      "flow_mse": 0.13320637494325638,
+      "zero_control_flow_mse": 0.14107182621955872,
+      "control_gain": 0.007865451276302338,
+      "hidden_angular_deg": 34.42536163330078,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "23544",
+      "flow_mse": 0.07810153067111969,
+      "zero_control_flow_mse": 0.08669165149331093,
+      "control_gain": 0.008590120822191238,
+      "hidden_angular_deg": 29.7498722076416,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "23583",
+      "flow_mse": 0.10112624367078145,
+      "zero_control_flow_mse": 0.15733103702465692,
+      "control_gain": 0.056204793353875473,
+      "hidden_angular_deg": 25.388874053955078,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "23628",
+      "flow_mse": 0.09064519281188647,
+      "zero_control_flow_mse": 0.09396086260676384,
+      "control_gain": 0.0033156697948773656,
+      "hidden_angular_deg": 41.06153106689453,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "23646",
+      "flow_mse": 0.12283248454332352,
+      "zero_control_flow_mse": 0.14615384737650552,
+      "control_gain": 0.023321362833182008,
+      "hidden_angular_deg": 29.7338924407959,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "24368",
+      "flow_mse": 0.12457665304342906,
+      "zero_control_flow_mse": 0.14780662705500922,
+      "control_gain": 0.023229974011580154,
+      "hidden_angular_deg": 9.054319381713867,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "24735",
+      "flow_mse": 0.05521919702490171,
+      "zero_control_flow_mse": 0.05987704793612162,
+      "control_gain": 0.00465785091121991,
+      "hidden_angular_deg": 14.164583206176758,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "24892",
+      "flow_mse": 0.06485318144162495,
+      "zero_control_flow_mse": 0.08012161528070767,
+      "control_gain": 0.015268433839082718,
+      "hidden_angular_deg": 34.965457916259766,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "25070",
+      "flow_mse": 0.12518766522407532,
+      "zero_control_flow_mse": 0.16503338515758514,
+      "control_gain": 0.03984571993350983,
+      "hidden_angular_deg": 5.2422590255737305,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "25622",
+      "flow_mse": 0.08462424327929814,
+      "zero_control_flow_mse": 0.10232680042584737,
+      "control_gain": 0.017702557146549225,
+      "hidden_angular_deg": 16.029582977294922,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "25647",
+      "flow_mse": 0.09493531783421834,
+      "zero_control_flow_mse": 0.09781308720509212,
+      "control_gain": 0.0028777693708737784,
+      "hidden_angular_deg": 15.851003646850586,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "26799",
+      "flow_mse": 0.12943324695030847,
+      "zero_control_flow_mse": 0.14677509913841882,
+      "control_gain": 0.01734185218811035,
+      "hidden_angular_deg": 25.416316986083984,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "26801",
+      "flow_mse": 0.08210304876168568,
+      "zero_control_flow_mse": 0.09043880303700765,
+      "control_gain": 0.00833575427532196,
+      "hidden_angular_deg": 70.53990173339844,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "27155",
+      "flow_mse": 0.20094292362531027,
+      "zero_control_flow_mse": 0.21832086145877838,
+      "control_gain": 0.01737793783346811,
+      "hidden_angular_deg": 20.42007064819336,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "27281",
+      "flow_mse": 0.12162380665540695,
+      "zero_control_flow_mse": 0.13161786397298178,
+      "control_gain": 0.009994057317574828,
+      "hidden_angular_deg": 10.394075393676758,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "27314",
+      "flow_mse": 0.12965251008669534,
+      "zero_control_flow_mse": 0.14534281194210052,
+      "control_gain": 0.01569030185540518,
+      "hidden_angular_deg": 21.95985984802246,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "27448",
+      "flow_mse": 0.10414233058691025,
+      "zero_control_flow_mse": 0.10017935434977214,
+      "control_gain": -0.003962976237138108,
+      "hidden_angular_deg": 13.74721908569336,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "27572",
+      "flow_mse": 0.15466666718324026,
+      "zero_control_flow_mse": 0.17353839427232742,
+      "control_gain": 0.01887172708908716,
+      "hidden_angular_deg": 18.011545181274414,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "27592",
+      "flow_mse": 0.08499550074338913,
+      "zero_control_flow_mse": 0.1113136683901151,
+      "control_gain": 0.026318167646725968,
+      "hidden_angular_deg": 16.722280502319336,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "27922",
+      "flow_mse": 0.11005176107088725,
+      "zero_control_flow_mse": 0.1403706818819046,
+      "control_gain": 0.03031892081101735,
+      "hidden_angular_deg": 14.566322326660156,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "28737",
+      "flow_mse": 0.13097768276929855,
+      "zero_control_flow_mse": 0.16386610517899194,
+      "control_gain": 0.03288842240969339,
+      "hidden_angular_deg": 11.880304336547852,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "28775",
+      "flow_mse": 0.0768265351653099,
+      "zero_control_flow_mse": 0.08513785153627396,
+      "control_gain": 0.00831131637096405,
+      "hidden_angular_deg": 24.519672393798828,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "29721",
+      "flow_mse": 0.12468587358792622,
+      "zero_control_flow_mse": 0.18234348048766455,
+      "control_gain": 0.057657606899738326,
+      "hidden_angular_deg": 48.221900939941406,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "29868",
+      "flow_mse": 0.15660966436068216,
+      "zero_control_flow_mse": 0.20496598134438196,
+      "control_gain": 0.0483563169836998,
+      "hidden_angular_deg": 20.289134979248047,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30054",
+      "flow_mse": 0.14397577693065008,
+      "zero_control_flow_mse": 0.172866091132164,
+      "control_gain": 0.028890314201513917,
+      "hidden_angular_deg": 28.209285736083984,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30173",
+      "flow_mse": 0.11567218601703644,
+      "zero_control_flow_mse": 0.141257514556249,
+      "control_gain": 0.025585328539212554,
+      "hidden_angular_deg": 21.27519416809082,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30285",
+      "flow_mse": 0.06913757200042407,
+      "zero_control_flow_mse": 0.0889360507329305,
+      "control_gain": 0.019798478732506425,
+      "hidden_angular_deg": 26.46540641784668,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30455",
+      "flow_mse": 0.0868363877137502,
+      "zero_control_flow_mse": 0.10091359913349152,
+      "control_gain": 0.014077211419741317,
+      "hidden_angular_deg": 25.322948455810547,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30471",
+      "flow_mse": 0.1043147270878156,
+      "zero_control_flow_mse": 0.12462684760491054,
+      "control_gain": 0.02031212051709494,
+      "hidden_angular_deg": 33.574825286865234,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30566",
+      "flow_mse": 0.12122069547573726,
+      "zero_control_flow_mse": 0.13882023096084595,
+      "control_gain": 0.01759953548510869,
+      "hidden_angular_deg": 37.9950065612793,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30676",
+      "flow_mse": 0.16152590264876684,
+      "zero_control_flow_mse": 0.2104509472846985,
+      "control_gain": 0.04892504463593164,
+      "hidden_angular_deg": 17.171852111816406,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30709",
+      "flow_mse": 0.13561595728000006,
+      "zero_control_flow_mse": 0.15320947269598642,
+      "control_gain": 0.01759351541598636,
+      "hidden_angular_deg": 19.962764739990234,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "30921",
+      "flow_mse": 0.09485018129150073,
+      "zero_control_flow_mse": 0.1366504691541195,
+      "control_gain": 0.04180028786261876,
+      "hidden_angular_deg": 31.556455612182617,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "31232",
+      "flow_mse": 0.17062422136465707,
+      "zero_control_flow_mse": 0.21257737775643668,
+      "control_gain": 0.0419531563917796,
+      "hidden_angular_deg": 27.391555786132812,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "31732",
+      "flow_mse": 0.09182653327782948,
+      "zero_control_flow_mse": 0.10450997700293858,
+      "control_gain": 0.0126834437251091,
+      "hidden_angular_deg": 38.489044189453125,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "31900",
+      "flow_mse": 0.19567826886971793,
+      "zero_control_flow_mse": 0.20815616846084595,
+      "control_gain": 0.012477899591128022,
+      "hidden_angular_deg": 18.032766342163086,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "32157",
+      "flow_mse": 0.051305620620648064,
+      "zero_control_flow_mse": 0.06341165428360303,
+      "control_gain": 0.012106033662954964,
+      "hidden_angular_deg": 35.814064025878906,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "32379",
+      "flow_mse": 0.12998958180348077,
+      "zero_control_flow_mse": 0.17314566423495611,
+      "control_gain": 0.04315608243147534,
+      "hidden_angular_deg": 13.813867568969727,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "32538",
+      "flow_mse": 0.10683127741018932,
+      "zero_control_flow_mse": 0.13107315947612128,
+      "control_gain": 0.02424188206593196,
+      "hidden_angular_deg": 25.815166473388672,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "32575",
+      "flow_mse": 0.10278675084312756,
+      "zero_control_flow_mse": 0.1329458070298036,
+      "control_gain": 0.03015905618667604,
+      "hidden_angular_deg": 7.81553316116333,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "32813",
+      "flow_mse": 0.060533224294583,
+      "zero_control_flow_mse": 0.05981247996290525,
+      "control_gain": -0.0007207443316777501,
+      "hidden_angular_deg": 18.61284828186035,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "33206",
+      "flow_mse": 0.08191256349285443,
+      "zero_control_flow_mse": 0.08915061503648758,
+      "control_gain": 0.007238051543633148,
+      "hidden_angular_deg": 50.35322189331055,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "33379",
+      "flow_mse": 0.03847777470946312,
+      "zero_control_flow_mse": 0.04208569725354513,
+      "control_gain": 0.003607922544082008,
+      "hidden_angular_deg": 23.35564422607422,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "33403",
+      "flow_mse": 0.09272830933332443,
+      "zero_control_flow_mse": 0.1000506728887558,
+      "control_gain": 0.007322363555431366,
+      "hidden_angular_deg": 19.995769500732422,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "33475",
+      "flow_mse": 0.11088566233714421,
+      "zero_control_flow_mse": 0.1370445191860199,
+      "control_gain": 0.026158856848875686,
+      "hidden_angular_deg": 16.781465530395508,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "34091",
+      "flow_mse": 0.08905985703070958,
+      "zero_control_flow_mse": 0.11059871067603429,
+      "control_gain": 0.021538853645324707,
+      "hidden_angular_deg": 47.430789947509766,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "34961",
+      "flow_mse": 0.10783847669760387,
+      "zero_control_flow_mse": 0.11788520216941833,
+      "control_gain": 0.010046725471814469,
+      "hidden_angular_deg": 19.440330505371094,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "35114",
+      "flow_mse": 0.09534112115701039,
+      "zero_control_flow_mse": 0.13099281738201776,
+      "control_gain": 0.03565169622500737,
+      "hidden_angular_deg": 28.09200668334961,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "35362",
+      "flow_mse": 0.11030378192663193,
+      "zero_control_flow_mse": 0.144957534968853,
+      "control_gain": 0.03465375304222107,
+      "hidden_angular_deg": 41.78730392456055,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "35947",
+      "flow_mse": 0.08994126071532567,
+      "zero_control_flow_mse": 0.11092192679643631,
+      "control_gain": 0.02098066608111064,
+      "hidden_angular_deg": 25.584056854248047,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36262",
+      "flow_mse": 0.11853071302175522,
+      "zero_control_flow_mse": 0.16355946411689123,
+      "control_gain": 0.045028751095136016,
+      "hidden_angular_deg": 8.811347961425781,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36264",
+      "flow_mse": 0.13147682696580887,
+      "zero_control_flow_mse": 0.17749420801798502,
+      "control_gain": 0.04601738105217615,
+      "hidden_angular_deg": 25.436695098876953,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36337",
+      "flow_mse": 0.11959964036941528,
+      "zero_control_flow_mse": 0.12949445098638535,
+      "control_gain": 0.009894810616970062,
+      "hidden_angular_deg": 79.09555053710938,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36633",
+      "flow_mse": 0.1655638093749682,
+      "zero_control_flow_mse": 0.20604458699623743,
+      "control_gain": 0.040480777621269226,
+      "hidden_angular_deg": 8.473075866699219,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36680",
+      "flow_mse": 0.10363385826349258,
+      "zero_control_flow_mse": 0.12978465110063553,
+      "control_gain": 0.026150792837142944,
+      "hidden_angular_deg": 35.048370361328125,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36801",
+      "flow_mse": 0.09329475586613019,
+      "zero_control_flow_mse": 0.10682594900329907,
+      "control_gain": 0.013531193137168884,
+      "hidden_angular_deg": 23.235374450683594,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36859",
+      "flow_mse": 0.08721948166688283,
+      "zero_control_flow_mse": 0.10502641399701436,
+      "control_gain": 0.01780693233013153,
+      "hidden_angular_deg": 73.8910140991211,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36916",
+      "flow_mse": 0.13483214130004248,
+      "zero_control_flow_mse": 0.20940420031547546,
+      "control_gain": 0.07457205901543298,
+      "hidden_angular_deg": 20.578853607177734,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "36995",
+      "flow_mse": 0.101899154484272,
+      "zero_control_flow_mse": 0.12299414972464244,
+      "control_gain": 0.021094995240370437,
+      "hidden_angular_deg": 40.77275848388672,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "37003",
+      "flow_mse": 0.13132386902968088,
+      "zero_control_flow_mse": 0.21275209138790765,
+      "control_gain": 0.08142822235822678,
+      "hidden_angular_deg": 32.89772033691406,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "37195",
+      "flow_mse": 0.06462599833806355,
+      "zero_control_flow_mse": 0.06976991395155589,
+      "control_gain": 0.005143915613492339,
+      "hidden_angular_deg": 20.130542755126953,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "37270",
+      "flow_mse": 0.11683811247348785,
+      "zero_control_flow_mse": 0.16556378453969955,
+      "control_gain": 0.0487256720662117,
+      "hidden_angular_deg": 27.55687713623047,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "37787",
+      "flow_mse": 0.0938795233766238,
+      "zero_control_flow_mse": 0.13708408176898956,
+      "control_gain": 0.04320455839236577,
+      "hidden_angular_deg": 13.56398868560791,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "37854",
+      "flow_mse": 0.11169077704350154,
+      "zero_control_flow_mse": 0.11423475792010625,
+      "control_gain": 0.0025439808766047067,
+      "hidden_angular_deg": 8.719144821166992,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "37961",
+      "flow_mse": 0.08327666670084,
+      "zero_control_flow_mse": 0.10487025479475658,
+      "control_gain": 0.02159358809391658,
+      "hidden_angular_deg": 14.513195991516113,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "38087",
+      "flow_mse": 0.13215310126543045,
+      "zero_control_flow_mse": 0.16002444426218668,
+      "control_gain": 0.027871342996756227,
+      "hidden_angular_deg": 21.035633087158203,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "38124",
+      "flow_mse": 0.12844077746073404,
+      "zero_control_flow_mse": 0.13626599063475928,
+      "control_gain": 0.007825213174025236,
+      "hidden_angular_deg": 18.48448944091797,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "38622",
+      "flow_mse": 0.06529756014545758,
+      "zero_control_flow_mse": 0.06948881347974141,
+      "control_gain": 0.004191253334283829,
+      "hidden_angular_deg": 27.73023796081543,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "38685",
+      "flow_mse": 0.10250141471624374,
+      "zero_control_flow_mse": 0.16639411449432373,
+      "control_gain": 0.06389269977807999,
+      "hidden_angular_deg": 19.642492294311523,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "38859",
+      "flow_mse": 0.08774352073669434,
+      "zero_control_flow_mse": 0.09546435376008351,
+      "control_gain": 0.007720833023389176,
+      "hidden_angular_deg": 35.90220642089844,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "38861",
+      "flow_mse": 0.0960968683163325,
+      "zero_control_flow_mse": 0.14731132859985033,
+      "control_gain": 0.051214460283517824,
+      "hidden_angular_deg": 12.548955917358398,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "39067",
+      "flow_mse": 0.10260860125223796,
+      "zero_control_flow_mse": 0.1589518040418625,
+      "control_gain": 0.05634320278962453,
+      "hidden_angular_deg": 50.668731689453125,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "39849",
+      "flow_mse": 0.1526054988304774,
+      "zero_control_flow_mse": 0.19229227552811304,
+      "control_gain": 0.03968677669763565,
+      "hidden_angular_deg": 23.460960388183594,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "40229",
+      "flow_mse": 0.07893565048774083,
+      "zero_control_flow_mse": 0.09883912901083629,
+      "control_gain": 0.019903478523095458,
+      "hidden_angular_deg": 21.46197509765625,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "40398",
+      "flow_mse": 0.09773629903793335,
+      "zero_control_flow_mse": 0.1320855145653089,
+      "control_gain": 0.03434921552737555,
+      "hidden_angular_deg": 31.09670066833496,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "40468",
+      "flow_mse": 0.11116648465394974,
+      "zero_control_flow_mse": 0.14311919858058295,
+      "control_gain": 0.03195271392663321,
+      "hidden_angular_deg": 25.307247161865234,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "41316",
+      "flow_mse": 0.1250943864385287,
+      "zero_control_flow_mse": 0.1595235069592794,
+      "control_gain": 0.0344291205207507,
+      "hidden_angular_deg": 25.507568359375,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "41448",
+      "flow_mse": 0.118082195520401,
+      "zero_control_flow_mse": 0.14110920578241348,
+      "control_gain": 0.02302701026201248,
+      "hidden_angular_deg": 24.602598190307617,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "41823",
+      "flow_mse": 0.16902672002712885,
+      "zero_control_flow_mse": 0.21088729798793793,
+      "control_gain": 0.04186057796080908,
+      "hidden_angular_deg": 20.97357177734375,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "41927",
+      "flow_mse": 0.09658207496007283,
+      "zero_control_flow_mse": 0.09981803844372432,
+      "control_gain": 0.0032359634836514883,
+      "hidden_angular_deg": 38.588199615478516,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "42001",
+      "flow_mse": 0.10124288747708003,
+      "zero_control_flow_mse": 0.13443579028050104,
+      "control_gain": 0.03319290280342101,
+      "hidden_angular_deg": 19.273096084594727,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "42400",
+      "flow_mse": 0.08547390003999074,
+      "zero_control_flow_mse": 0.11170063416163127,
+      "control_gain": 0.026226734121640533,
+      "hidden_angular_deg": 16.666786193847656,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "43058",
+      "flow_mse": 0.10418841242790222,
+      "zero_control_flow_mse": 0.13113871837655702,
+      "control_gain": 0.0269503059486548,
+      "hidden_angular_deg": 42.680763244628906,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "43171",
+      "flow_mse": 0.20412241915861765,
+      "zero_control_flow_mse": 0.22494479020436606,
+      "control_gain": 0.02082237104574841,
+      "hidden_angular_deg": 15.442916870117188,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "43219",
+      "flow_mse": 0.2157772034406662,
+      "zero_control_flow_mse": 0.2687581752737363,
+      "control_gain": 0.0529809718330701,
+      "hidden_angular_deg": 8.103006362915039,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "43367",
+      "flow_mse": 0.09455431749423344,
+      "zero_control_flow_mse": 0.1136940245827039,
+      "control_gain": 0.01913970708847046,
+      "hidden_angular_deg": 38.038238525390625,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "43575",
+      "flow_mse": 0.0768944260974725,
+      "zero_control_flow_mse": 0.07918912172317505,
+      "control_gain": 0.0022946956257025447,
+      "hidden_angular_deg": 6.573692798614502,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "43933",
+      "flow_mse": 0.17515402535597482,
+      "zero_control_flow_mse": 0.25763077785571414,
+      "control_gain": 0.08247675249973932,
+      "hidden_angular_deg": 9.526837348937988,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "44081",
+      "flow_mse": 0.09105229005217552,
+      "zero_control_flow_mse": 0.09998834257324536,
+      "control_gain": 0.00893605252106984,
+      "hidden_angular_deg": 23.65423583984375,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "44325",
+      "flow_mse": 0.07688673834005992,
+      "zero_control_flow_mse": 0.09179208303491275,
+      "control_gain": 0.014905344694852829,
+      "hidden_angular_deg": 49.5984001159668,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "44538",
+      "flow_mse": 0.11150531470775604,
+      "zero_control_flow_mse": 0.1254508967200915,
+      "control_gain": 0.01394558201233545,
+      "hidden_angular_deg": 28.727142333984375,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "44684",
+      "flow_mse": 0.23537514607111612,
+      "zero_control_flow_mse": 0.29185470938682556,
+      "control_gain": 0.05647956331570944,
+      "hidden_angular_deg": 20.77832794189453,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "44777",
+      "flow_mse": 0.11488321423530579,
+      "zero_control_flow_mse": 0.15960858513911566,
+      "control_gain": 0.044725370903809875,
+      "hidden_angular_deg": 13.313457489013672,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "44831",
+      "flow_mse": 0.19255300611257553,
+      "zero_control_flow_mse": 0.2220218355456988,
+      "control_gain": 0.02946882943312326,
+      "hidden_angular_deg": 17.25424575805664,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "45686",
+      "flow_mse": 0.10241957878073056,
+      "zero_control_flow_mse": 0.10586687549948692,
+      "control_gain": 0.0034472967187563625,
+      "hidden_angular_deg": 67.84183502197266,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "45760",
+      "flow_mse": 0.14703039328257242,
+      "zero_control_flow_mse": 0.1627456173300743,
+      "control_gain": 0.01571522404750189,
+      "hidden_angular_deg": 41.96741485595703,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "45909",
+      "flow_mse": 0.10965883235136668,
+      "zero_control_flow_mse": 0.162887175877889,
+      "control_gain": 0.05322834352652232,
+      "hidden_angular_deg": 21.006872177124023,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "45996",
+      "flow_mse": 0.1181720495223999,
+      "zero_control_flow_mse": 0.1808274139960607,
+      "control_gain": 0.0626553644736608,
+      "hidden_angular_deg": 27.518856048583984,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "47493",
+      "flow_mse": 0.12828392535448074,
+      "zero_control_flow_mse": 0.15699592232704163,
+      "control_gain": 0.028711996972560883,
+      "hidden_angular_deg": 16.42177391052246,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "47646",
+      "flow_mse": 0.19128727167844772,
+      "zero_control_flow_mse": 0.2551606396834056,
+      "control_gain": 0.06387336800495785,
+      "hidden_angular_deg": 8.464090347290039,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "48022",
+      "flow_mse": 0.08563126623630524,
+      "zero_control_flow_mse": 0.10660407443841298,
+      "control_gain": 0.020972808202107743,
+      "hidden_angular_deg": 25.858701705932617,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "48115",
+      "flow_mse": 0.0817358468969663,
+      "zero_control_flow_mse": 0.09278410921494167,
+      "control_gain": 0.011048262317975371,
+      "hidden_angular_deg": 38.67807388305664,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "48330",
+      "flow_mse": 0.08710744231939316,
+      "zero_control_flow_mse": 0.11145308365424474,
+      "control_gain": 0.024345641334851578,
+      "hidden_angular_deg": 21.533065795898438,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "48510",
+      "flow_mse": 0.10217559585968654,
+      "zero_control_flow_mse": 0.13186484823624292,
+      "control_gain": 0.029689252376556383,
+      "hidden_angular_deg": 33.44009780883789,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "48514",
+      "flow_mse": 0.17562003682057062,
+      "zero_control_flow_mse": 0.20566636323928833,
+      "control_gain": 0.03004632641871771,
+      "hidden_angular_deg": 34.63441467285156,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "48740",
+      "flow_mse": 0.12247447421153386,
+      "zero_control_flow_mse": 0.1469887619217237,
+      "control_gain": 0.024514287710189833,
+      "hidden_angular_deg": 24.43505859375,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "49328",
+      "flow_mse": 0.06112492953737577,
+      "zero_control_flow_mse": 0.06551935896277428,
+      "control_gain": 0.004394429425398506,
+      "hidden_angular_deg": 32.92964553833008,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "49330",
+      "flow_mse": 0.18435239046812057,
+      "zero_control_flow_mse": 0.22223676492770514,
+      "control_gain": 0.03788437445958456,
+      "hidden_angular_deg": 10.336151123046875,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "49342",
+      "flow_mse": 0.08267964671055476,
+      "zero_control_flow_mse": 0.10087306797504425,
+      "control_gain": 0.018193421264489487,
+      "hidden_angular_deg": 24.661706924438477,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "49542",
+      "flow_mse": 0.08612679441769917,
+      "zero_control_flow_mse": 0.10079243282477061,
+      "control_gain": 0.01466563840707144,
+      "hidden_angular_deg": 9.956863403320312,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "49635",
+      "flow_mse": 0.09026167293389638,
+      "zero_control_flow_mse": 0.15649190048376718,
+      "control_gain": 0.0662302275498708,
+      "hidden_angular_deg": 25.62171173095703,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "49637",
+      "flow_mse": 0.06506248687704404,
+      "zero_control_flow_mse": 0.06953864172101021,
+      "control_gain": 0.004476154843966171,
+      "hidden_angular_deg": 36.45229721069336,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "50454",
+      "flow_mse": 0.13187755892674127,
+      "zero_control_flow_mse": 0.1928463727235794,
+      "control_gain": 0.060968813796838134,
+      "hidden_angular_deg": 34.26582336425781,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "50506",
+      "flow_mse": 0.13225697726011276,
+      "zero_control_flow_mse": 0.14660381774107614,
+      "control_gain": 0.01434684048096338,
+      "hidden_angular_deg": 19.060720443725586,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "51131",
+      "flow_mse": 0.11730383336544037,
+      "zero_control_flow_mse": 0.1462335412700971,
+      "control_gain": 0.028929707904656737,
+      "hidden_angular_deg": 14.157116889953613,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "51396",
+      "flow_mse": 0.09366422394911449,
+      "zero_control_flow_mse": 0.105265857030948,
+      "control_gain": 0.011601633081833512,
+      "hidden_angular_deg": 19.855487823486328,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "51480",
+      "flow_mse": 0.09249545137087505,
+      "zero_control_flow_mse": 0.11010296891132991,
+      "control_gain": 0.017607517540454865,
+      "hidden_angular_deg": 24.53160858154297,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "51686",
+      "flow_mse": 0.08719807863235474,
+      "zero_control_flow_mse": 0.11105044931173325,
+      "control_gain": 0.02385237067937851,
+      "hidden_angular_deg": 25.325523376464844,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "52509",
+      "flow_mse": 0.1531715840101242,
+      "zero_control_flow_mse": 0.21636238445838293,
+      "control_gain": 0.06319080044825873,
+      "hidden_angular_deg": 12.5648193359375,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "52617",
+      "flow_mse": 0.17694691568613052,
+      "zero_control_flow_mse": 0.22703296194473901,
+      "control_gain": 0.05008604625860849,
+      "hidden_angular_deg": 19.48575210571289,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "52714",
+      "flow_mse": 0.17364352444807687,
+      "zero_control_flow_mse": 0.1879780814051628,
+      "control_gain": 0.014334556957085937,
+      "hidden_angular_deg": 38.33440017700195,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "52920",
+      "flow_mse": 0.2034259314338366,
+      "zero_control_flow_mse": 0.2577904239296913,
+      "control_gain": 0.054364492495854705,
+      "hidden_angular_deg": 22.887971878051758,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "53209",
+      "flow_mse": 0.08173821121454239,
+      "zero_control_flow_mse": 0.11814869195222855,
+      "control_gain": 0.03641048073768616,
+      "hidden_angular_deg": 24.642940521240234,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "53341",
+      "flow_mse": 0.07377804070711136,
+      "zero_control_flow_mse": 0.09479812035957973,
+      "control_gain": 0.021020079652468368,
+      "hidden_angular_deg": 59.76435470581055,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "53367",
+      "flow_mse": 0.17086192220449448,
+      "zero_control_flow_mse": 0.20282417287429175,
+      "control_gain": 0.03196225066979727,
+      "hidden_angular_deg": 10.624137878417969,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "53401",
+      "flow_mse": 0.1011907955010732,
+      "zero_control_flow_mse": 0.17033221572637558,
+      "control_gain": 0.06914142022530238,
+      "hidden_angular_deg": 13.213926315307617,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "53458",
+      "flow_mse": 0.05477550501624743,
+      "zero_control_flow_mse": 0.06186194842060407,
+      "control_gain": 0.007086443404356643,
+      "hidden_angular_deg": 31.89512062072754,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "53643",
+      "flow_mse": 0.0864599992831548,
+      "zero_control_flow_mse": 0.11879396935304005,
+      "control_gain": 0.032333970069885254,
+      "hidden_angular_deg": 32.53773498535156,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54077",
+      "flow_mse": 0.2093431899944941,
+      "zero_control_flow_mse": 0.2782185648878415,
+      "control_gain": 0.06887537489334741,
+      "hidden_angular_deg": 18.45415496826172,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54117",
+      "flow_mse": 0.055609953900178276,
+      "zero_control_flow_mse": 0.07315436253945033,
+      "control_gain": 0.017544408639272056,
+      "hidden_angular_deg": 38.829734802246094,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54258",
+      "flow_mse": 0.11250076442956924,
+      "zero_control_flow_mse": 0.1573388104637464,
+      "control_gain": 0.044838046034177154,
+      "hidden_angular_deg": 38.4831657409668,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54377",
+      "flow_mse": 0.06272281209627788,
+      "zero_control_flow_mse": 0.07347645983099937,
+      "control_gain": 0.010753647734721497,
+      "hidden_angular_deg": 30.846778869628906,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54431",
+      "flow_mse": 0.12982342888911566,
+      "zero_control_flow_mse": 0.11891268938779831,
+      "control_gain": -0.010910739501317351,
+      "hidden_angular_deg": 14.110739707946777,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54440",
+      "flow_mse": 0.11780454963445663,
+      "zero_control_flow_mse": 0.16529186566670737,
+      "control_gain": 0.04748731603225073,
+      "hidden_angular_deg": 21.11418342590332,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54530",
+      "flow_mse": 0.109932246307532,
+      "zero_control_flow_mse": 0.13584883759419122,
+      "control_gain": 0.025916591286659227,
+      "hidden_angular_deg": 20.162853240966797,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54555",
+      "flow_mse": 0.08302046606938045,
+      "zero_control_flow_mse": 0.10267418374617894,
+      "control_gain": 0.019653717676798493,
+      "hidden_angular_deg": 30.87255096435547,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54762",
+      "flow_mse": 0.09548331797122955,
+      "zero_control_flow_mse": 0.11669871707757314,
+      "control_gain": 0.021215399106343583,
+      "hidden_angular_deg": 22.36544418334961,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "54823",
+      "flow_mse": 0.12958124776681265,
+      "zero_control_flow_mse": 0.14260065679748854,
+      "control_gain": 0.013019409030675888,
+      "hidden_angular_deg": 6.973262786865234,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "55154",
+      "flow_mse": 0.10260954995950063,
+      "zero_control_flow_mse": 0.10682622094949086,
+      "control_gain": 0.004216670989990234,
+      "hidden_angular_deg": 21.408885955810547,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "55202",
+      "flow_mse": 0.09382240970929463,
+      "zero_control_flow_mse": 0.10723526527484258,
+      "control_gain": 0.013412855565547943,
+      "hidden_angular_deg": 21.14249038696289,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "55294",
+      "flow_mse": 0.14838802069425583,
+      "zero_control_flow_mse": 0.17832850416501364,
+      "control_gain": 0.02994048347075781,
+      "hidden_angular_deg": 22.403057098388672,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "55316",
+      "flow_mse": 0.1052623341480891,
+      "zero_control_flow_mse": 0.15218476702769598,
+      "control_gain": 0.04692243287960689,
+      "hidden_angular_deg": 14.92186450958252,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "55318",
+      "flow_mse": 0.09221685429414113,
+      "zero_control_flow_mse": 0.09417683134476344,
+      "control_gain": 0.0019599770506223135,
+      "hidden_angular_deg": 5.949240684509277,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "56085",
+      "flow_mse": 0.07720981041590373,
+      "zero_control_flow_mse": 0.09738719463348389,
+      "control_gain": 0.020177384217580155,
+      "hidden_angular_deg": 19.823123931884766,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "56429",
+      "flow_mse": 0.12404283384482066,
+      "zero_control_flow_mse": 0.14869806170463562,
+      "control_gain": 0.024655227859814957,
+      "hidden_angular_deg": 38.839298248291016,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "56763",
+      "flow_mse": 0.20296560724576315,
+      "zero_control_flow_mse": 0.21527674545844397,
+      "control_gain": 0.012311138212680817,
+      "hidden_angular_deg": 16.215456008911133,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57059",
+      "flow_mse": 0.08743425458669662,
+      "zero_control_flow_mse": 0.1149892807006836,
+      "control_gain": 0.02755502611398697,
+      "hidden_angular_deg": 14.548686981201172,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57061",
+      "flow_mse": 0.15005223949750265,
+      "zero_control_flow_mse": 0.2572399104634921,
+      "control_gain": 0.10718767096598944,
+      "hidden_angular_deg": 9.017333984375,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57096",
+      "flow_mse": 0.0799863946934541,
+      "zero_control_flow_mse": 0.09515994414687157,
+      "control_gain": 0.015173549453417465,
+      "hidden_angular_deg": 27.222368240356445,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57278",
+      "flow_mse": 0.1703348308801651,
+      "zero_control_flow_mse": 0.20578707506259283,
+      "control_gain": 0.03545224418242773,
+      "hidden_angular_deg": 19.9606990814209,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57302",
+      "flow_mse": 0.09845700363318126,
+      "zero_control_flow_mse": 0.13331627597411475,
+      "control_gain": 0.034859272340933486,
+      "hidden_angular_deg": 17.539791107177734,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57530",
+      "flow_mse": 0.13375612845023474,
+      "zero_control_flow_mse": 0.16925678153832754,
+      "control_gain": 0.035500653088092804,
+      "hidden_angular_deg": 37.626834869384766,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57584",
+      "flow_mse": 0.10451340923706691,
+      "zero_control_flow_mse": 0.10724321752786636,
+      "control_gain": 0.002729808290799454,
+      "hidden_angular_deg": 9.56761360168457,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57618",
+      "flow_mse": 0.092632707208395,
+      "zero_control_flow_mse": 0.09721537058552106,
+      "control_gain": 0.004582663377126053,
+      "hidden_angular_deg": 7.577151298522949,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "57975",
+      "flow_mse": 0.15051677574714026,
+      "zero_control_flow_mse": 0.21729146440823874,
+      "control_gain": 0.06677468866109848,
+      "hidden_angular_deg": 7.845098495483398,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "58447",
+      "flow_mse": 0.110615241030852,
+      "zero_control_flow_mse": 0.14963747809330621,
+      "control_gain": 0.03902223706245421,
+      "hidden_angular_deg": 27.16971206665039,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "58679",
+      "flow_mse": 0.10328645259141922,
+      "zero_control_flow_mse": 0.14512586469451585,
+      "control_gain": 0.041839412103096635,
+      "hidden_angular_deg": 16.86714744567871,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "58724",
+      "flow_mse": 0.13282939791679382,
+      "zero_control_flow_mse": 0.22052863240242004,
+      "control_gain": 0.08769923448562622,
+      "hidden_angular_deg": 16.74329948425293,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "58734",
+      "flow_mse": 0.12338240817189217,
+      "zero_control_flow_mse": 0.1410887228945891,
+      "control_gain": 0.01770631472269693,
+      "hidden_angular_deg": 14.582205772399902,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "58785",
+      "flow_mse": 0.07335547481973966,
+      "zero_control_flow_mse": 0.10093693931897481,
+      "control_gain": 0.027581464499235153,
+      "hidden_angular_deg": 33.817787170410156,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "58972",
+      "flow_mse": 0.10090196381012599,
+      "zero_control_flow_mse": 0.13190692911545435,
+      "control_gain": 0.031004965305328355,
+      "hidden_angular_deg": 54.17903518676758,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "59368",
+      "flow_mse": 0.06145414089163145,
+      "zero_control_flow_mse": 0.06516383712490399,
+      "control_gain": 0.0037096962332725456,
+      "hidden_angular_deg": 34.21329879760742,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "59839",
+      "flow_mse": 0.13022634387016296,
+      "zero_control_flow_mse": 0.1788889840245247,
+      "control_gain": 0.048662640154361725,
+      "hidden_angular_deg": 31.121109008789062,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "59905",
+      "flow_mse": 0.07647535453240077,
+      "zero_control_flow_mse": 0.08588303998112679,
+      "control_gain": 0.009407685448726014,
+      "hidden_angular_deg": 21.884990692138672,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "60305",
+      "flow_mse": 0.15876294175783792,
+      "zero_control_flow_mse": 0.24098380406697592,
+      "control_gain": 0.082220862309138,
+      "hidden_angular_deg": 22.088647842407227,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "60522",
+      "flow_mse": 0.19169497986634573,
+      "zero_control_flow_mse": 0.23508413632710776,
+      "control_gain": 0.043389156460762024,
+      "hidden_angular_deg": 15.010360717773438,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "60765",
+      "flow_mse": 0.08237553512056668,
+      "zero_control_flow_mse": 0.09658039857943852,
+      "control_gain": 0.014204863458871841,
+      "hidden_angular_deg": 5.98369026184082,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "61881",
+      "flow_mse": 0.0781240959962209,
+      "zero_control_flow_mse": 0.10959095756212871,
+      "control_gain": 0.031466861565907805,
+      "hidden_angular_deg": 21.33572006225586,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "61994",
+      "flow_mse": 0.09257349868615468,
+      "zero_control_flow_mse": 0.11813443154096603,
+      "control_gain": 0.025560932854811355,
+      "hidden_angular_deg": 33.6713981628418,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "62145",
+      "flow_mse": 0.10277965168158214,
+      "zero_control_flow_mse": 0.1306808739900589,
+      "control_gain": 0.02790122230847676,
+      "hidden_angular_deg": 15.563172340393066,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "62303",
+      "flow_mse": 0.2106859634319941,
+      "zero_control_flow_mse": 0.28215338041385013,
+      "control_gain": 0.07146741698185602,
+      "hidden_angular_deg": 33.69835662841797,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "62709",
+      "flow_mse": 0.07484782735506694,
+      "zero_control_flow_mse": 0.08656223366657893,
+      "control_gain": 0.011714406311511993,
+      "hidden_angular_deg": 31.57596206665039,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "62733",
+      "flow_mse": 0.11405378828446071,
+      "zero_control_flow_mse": 0.14492084830999374,
+      "control_gain": 0.030867060025533036,
+      "hidden_angular_deg": 18.559982299804688,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "63044",
+      "flow_mse": 0.08272901425758998,
+      "zero_control_flow_mse": 0.10152073701222737,
+      "control_gain": 0.01879172275463739,
+      "hidden_angular_deg": 47.13203430175781,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "63108",
+      "flow_mse": 0.10938099523385365,
+      "zero_control_flow_mse": 0.11076586196819942,
+      "control_gain": 0.0013848667343457632,
+      "hidden_angular_deg": 7.32768440246582,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "63723",
+      "flow_mse": 0.06690828874707222,
+      "zero_control_flow_mse": 0.08056808263063431,
+      "control_gain": 0.013659793883562088,
+      "hidden_angular_deg": 23.443082809448242,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "63753",
+      "flow_mse": 0.14630005011955896,
+      "zero_control_flow_mse": 0.16889954606691995,
+      "control_gain": 0.022599495947360992,
+      "hidden_angular_deg": 10.20887565612793,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "63755",
+      "flow_mse": 0.1469717820485433,
+      "zero_control_flow_mse": 0.19370247175296149,
+      "control_gain": 0.04673068970441818,
+      "hidden_angular_deg": 18.557987213134766,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "63875",
+      "flow_mse": 0.13351028660933176,
+      "zero_control_flow_mse": 0.1788994570573171,
+      "control_gain": 0.04538917044798535,
+      "hidden_angular_deg": 22.74451446533203,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "63876",
+      "flow_mse": 0.2026913563410441,
+      "zero_control_flow_mse": 0.24704491098721823,
+      "control_gain": 0.04435355464617413,
+      "hidden_angular_deg": 18.608327865600586,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "66128",
+      "flow_mse": 0.08222334086894989,
+      "zero_control_flow_mse": 0.11041257282098134,
+      "control_gain": 0.02818923195203145,
+      "hidden_angular_deg": 46.09886932373047,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "66173",
+      "flow_mse": 0.052298632760842644,
+      "zero_control_flow_mse": 0.07655626038710277,
+      "control_gain": 0.024257627626260124,
+      "hidden_angular_deg": 23.956817626953125,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "66189",
+      "flow_mse": 0.07735668495297432,
+      "zero_control_flow_mse": 0.10943574830889702,
+      "control_gain": 0.0320790633559227,
+      "hidden_angular_deg": 29.0667781829834,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "66221",
+      "flow_mse": 0.08505074431498845,
+      "zero_control_flow_mse": 0.09448930621147156,
+      "control_gain": 0.009438561896483108,
+      "hidden_angular_deg": 15.983589172363281,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "66256",
+      "flow_mse": 0.066887978464365,
+      "zero_control_flow_mse": 0.1019745667775472,
+      "control_gain": 0.03508658831318219,
+      "hidden_angular_deg": 22.634902954101562,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "66521",
+      "flow_mse": 0.09406074384848277,
+      "zero_control_flow_mse": 0.11073751499255498,
+      "control_gain": 0.016676771144072206,
+      "hidden_angular_deg": 53.24324035644531,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "66705",
+      "flow_mse": 0.06374371175964673,
+      "zero_control_flow_mse": 0.07000052308042844,
+      "control_gain": 0.006256811320781708,
+      "hidden_angular_deg": 24.694185256958008,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "69221",
+      "flow_mse": 0.07158935815095901,
+      "zero_control_flow_mse": 0.08300241952141126,
+      "control_gain": 0.01141306137045224,
+      "hidden_angular_deg": 38.82981872558594,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "69256",
+      "flow_mse": 0.13740343352158865,
+      "zero_control_flow_mse": 0.16702142357826233,
+      "control_gain": 0.029617990056673676,
+      "hidden_angular_deg": 18.25874900817871,
+      "observed_angular_deg": 0.08156611025333405,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "69275",
+      "flow_mse": 0.08333722005287807,
+      "zero_control_flow_mse": 0.09670698394378026,
+      "control_gain": 0.013369763890902192,
+      "hidden_angular_deg": 11.599603652954102,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "69300",
+      "flow_mse": 0.06521233792106311,
+      "zero_control_flow_mse": 0.07747063413262367,
+      "control_gain": 0.012258296211560563,
+      "hidden_angular_deg": 15.060033798217773,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "69353",
+      "flow_mse": 0.07424793764948845,
+      "zero_control_flow_mse": 0.08744402850667636,
+      "control_gain": 0.013196090857187912,
+      "hidden_angular_deg": 32.661739349365234,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "69370",
+      "flow_mse": 0.09074928611516953,
+      "zero_control_flow_mse": 0.1200667272011439,
+      "control_gain": 0.02931744108597438,
+      "hidden_angular_deg": 25.435470581054688,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "69494",
+      "flow_mse": 0.07027789577841759,
+      "zero_control_flow_mse": 0.08067457874615987,
+      "control_gain": 0.01039668296774228,
+      "hidden_angular_deg": 21.23363494873047,
+      "observed_angular_deg": 0.08156611770391464,
+      "hidden_uncertainty": null
+    },
+    {
+      "id": "69544",
+      "flow_mse": 0.1099626620610555,
+      "zero_control_flow_mse": 0.1280351181825002,
+      "control_gain": 0.018072456121444716,
+      "hidden_angular_deg": 39.787261962890625,
+      "observed_angular_deg": 0.08156612515449524,
+      "hidden_uncertainty": null
+    }
+  ],
+  "means": {
+    "flow_mse": 0.1075919324918738,
+    "hidden_angular_deg": 26.082427066227176,
+    "observed_angular_deg": 0.08156611885664598,
+    "zero_control_flow_mse": 0.13229985076160924,
+    "control_gain": 0.024707918269735455
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "source": "55154",
+  "representation": "continuous",
+  "training_seed": 2028,
+  "training_step": 3000,
+  "videos": 4,
+  "per_video": [
+    {
+      "video": "55154_scale1p0_seed0.mp4",
+      "control_scale": 1.0,
+      "detection_rate": 0.7352941036224365,
+      "specified_hl_accuracy": 0.3100000023841858,
+      "specified_angular_deg": 38.858463287353516,
+      "temporal_acceleration_error": 3.831476926803589
+    },
+    {
+      "video": "55154_scale1p0_seed1.mp4",
+      "control_scale": 1.0,
+      "detection_rate": 0.8235294222831726,
+      "specified_hl_accuracy": 0.3392857015132904,
+      "specified_angular_deg": 34.87339401245117,
+      "temporal_acceleration_error": 7.073132038116455
+    },
+    {
+      "video": "55154_scale1p0_seed2.mp4",
+      "control_scale": 1.0,
+      "detection_rate": 0.8235294222831726,
+      "specified_hl_accuracy": 0.20357142388820648,
+      "specified_angular_deg": 42.60503387451172,
+      "temporal_acceleration_error": 5.099552154541016
+    },
+    {
+      "video": "55154_scale1p0_seed3.mp4",
+      "control_scale": 1.0,
+      "detection_rate": 0.7352941036224365,
+      "specified_hl_accuracy": 0.31200000643730164,
+      "specified_angular_deg": 38.98552322387695,
+      "temporal_acceleration_error": 1.7524795532226562
+    }
+  ],
+  "means": {
+    "detection_rate": 0.7794117629528046,
+    "specified_hl_accuracy": 0.2912142835557461,
+    "specified_angular_deg": 38.83060359954834,
+    "hidden_pairwise_diversity_deg": null,
+    "specified_pairwise_symbol_disagreement": 0.6499466796716055,
+    "temporal_acceleration_error": 4.439160168170929
+  },
+  "operating_point": {
+    "control_scale": 1.0,
+    "detection_rate": 0.7794117629528046,
+    "specified_hl_accuracy": 0.2912142835557461,
+    "specified_angular_deg": 38.83060359954834,
+    "temporal_acceleration_error": 4.439160168170929,
+    "specified_pairwise_diversity_deg": 39.461244901021324,
+    "specified_pairwise_symbol_disagreement": 0.6499466796716055,
+    "hidden_pairwise_diversity_deg": null,
+    "localized_diversity_deg": null
+  },
+  "frontier": [
+    {
+      "control_scale": 1.0,
+      "detection_rate": 0.7794117629528046,
+      "specified_hl_accuracy": 0.2912142835557461,
+      "specified_angular_deg": 38.83060359954834,
+      "temporal_acceleration_error": 4.439160168170929,
+      "specified_pairwise_diversity_deg": 39.461244901021324,
+      "specified_pairwise_symbol_disagreement": 0.6499466796716055,
+      "hidden_pairwise_diversity_deg": null,
+      "localized_diversity_deg": null
+    }
+  ],
+  "frontier_hypervolume": null
+}
